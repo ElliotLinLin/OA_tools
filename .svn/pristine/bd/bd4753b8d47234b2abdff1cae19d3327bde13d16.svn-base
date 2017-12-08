@@ -1,0 +1,116 @@
+package com.hst.mininurse.ui;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.telephony.TelephonyManager;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
+
+import com.google.gson.Gson;
+import com.hst.mininurse.R;
+import com.hst.mininurse.bean.CodeAndMsgBean;
+import com.hst.mininurse.constants.AppConstants;
+import com.hst.mininurse.utils.BaseCallBack;
+import com.hst.mininurse.utils.DESUtil2;
+import com.zhy.http.okhttp.OkHttpUtils;
+
+public class RegisterActivity extends BaseActivity implements View.OnClickListener {
+
+    private EditText mEt_pwd;
+    private View mIv_login;
+    private View mIv_regsiter;
+    private String mResult;
+    private String mSzImei;
+    private SharedPreferences myPreferences;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_register);
+        findView();
+    }
+
+    private void findView() {
+        TelephonyManager TelephonyMgr = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
+        mSzImei = TelephonyMgr.getDeviceId();
+        mEt_pwd = (EditText) findViewById(R.id.et_pwd);
+        mIv_login = (findViewById(R.id.iv_login));
+        mIv_regsiter = (findViewById(R.id.iv_regsiter));
+
+        mIv_login.setOnClickListener(this);
+        mIv_regsiter.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()) {
+
+            case R.id.iv_login:
+                if (TextUtils.isEmpty(mSzImei)) {
+                    showToast("设备号获取失败,请同意权限");
+                    return;
+                }
+                postLoginOrRegiser(0);
+//                setLogined();
+//                startActivity(new Intent(RegisterActivity.this,MainActivity2.class));
+//                RegisterActivity.this.finish();
+                break;
+            case R.id.iv_regsiter:
+                postLoginOrRegiser(1);
+                break;
+
+        }
+    }
+
+    private void postLoginOrRegiser(int status) {
+        try {
+            OkHttpUtils
+                    .get()
+                    .url(AppConstants.login)
+                    .addParams("IMEI", DESUtil2.EncryptAsDoNet(mSzImei, AppConstants.DESKEY))
+                    .addParams("PassWord", mEt_pwd.getText().toString().trim())
+                    .addParams("Status", status+"")
+                    .build()
+                    .execute(new BaseCallBack(this) {
+                        @Override
+                        public void onResponse(String response, int id) {
+                            if (TextUtils.isEmpty(response)) {
+                                return;
+                            }
+                            try {
+                                String result = DESUtil2.DecryptDoNet(response, AppConstants.DESKEY);
+                                Log.w("RegisterActivity", result);
+                                CodeAndMsgBean codeAndMsgBean = new Gson().fromJson(result, CodeAndMsgBean.class);
+                                if (0 == codeAndMsgBean.getReturnCode()) {
+                                    setLogined();
+                                    startActivity(new Intent(RegisterActivity.this,MainActivity2.class));
+                                    RegisterActivity.this.finish();
+                                } else {
+                                    showToast(codeAndMsgBean.getReturnMessage());
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.w("RegisterActivity", e.getMessage());
+        }
+    }
+
+    void setLogined(){
+        // 实例化SharedPreferences对象（第一步）
+       myPreferences = getSharedPreferences(AppConstants.SHARE_PREF_FILENAME,
+                Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor=myPreferences.edit();
+        editor.putBoolean(AppConstants.SHARE_PREF_LOGIND,true);
+        editor.commit();
+    }
+}

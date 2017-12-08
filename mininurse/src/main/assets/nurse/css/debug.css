@@ -1,0 +1,63 @@
+
+html,body{
+	height: 100%;padding: 0;margin: 0;
+}
+
+.bottom_bar{
+	position: absolute;
+	height: 50px;
+	width: 100%;
+	bottom: 0;
+	
+	border-top: 1px solid lightgray;
+	
+	background-color: rgba(0,122,255,0.8);
+}
+
+.bottom_bar input{
+	border: 1px solid lightblue;
+	width: 75%;
+	height: 36px;
+	margin: 7px;
+	padding: 0 5px 0 5px;
+	
+	font-size: 16px;
+}
+
+.bottom_bar button{
+	border: none;
+	position: absolute;
+	padding: 0;
+	height: 50px;
+	width: calc(25% - 26px);
+	/*border: 1px solid lightblue;
+	border-radius: 2px;*/
+	/*text-align: center;*/
+	font-size: 17px;
+	background-color: rgba(255,255,255,0);
+}
+
+#allData {
+	padding: 5px;
+	height: calc(100% - 94px);
+	overflow: auto;
+	
+	background-color: lightblue;
+}
+
+#allData p{
+	max-width: 60%;
+	/*min-width: 10px;*/
+	/*width: 60%;*/
+	
+	word-wrap: break-word;word-break: normal;
+	
+	background-color: lightcyan;
+	
+	border: 1px solid lightcyan;
+	border-radius: 3px;
+}
+
+.selfSend{
+	margin-left: calc(40% - 5px);
+}

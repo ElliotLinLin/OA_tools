@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="css/header.css"/>
+		<link href="css/mui.min.css" rel="stylesheet"/>
+		<link rel="stylesheet" href="css/alert.css" />
+		<script type="text/javascript" src="js/mui.min.js" ></script>
+		<link rel="stylesheet" type="text/css" href="css/setting.css"/>
+		<script type="text/javascript" src="js/jquery-2.1.4.min.js" ></script>
+		<script type="text/javascript" src="js/fff.js" ></script>
+		<title>2</title>
+		
+	</head>
+	<body>
+		<div class="nav_bar">
+			<a class="leftBack" onclick="history.go(-1);"><img src="images/minute_return.png"/></a>
+			<p class="header-title">设置模式</p>
+		</div>
+		
+		<div id="main">
+			<div id="fullbg"></div> 
+			<div id="dialog">  
+				<div><p style="position: absolute;bottom: 0;left: 0;right: 0; color: white;font-family: "微软雅黑";">设置成功</p></div>
+				<button onclick="closeBg();"></button>
+			</div>
+		</div>
+		
+		<div class="set_subTitle">基本参数<button id="allSelect" class="set_subTitle_button" onclick="aass(this)">全选</button></div>
+		<ul id="pppp" class="list_body">
+			
+	        <div class="rowS">
+	        	    <a id="T" class="name" onclick="hhhh(this)">通讯号</a>
+	            <a class="second"><input type="text" oninput="inputChange(this)" onfocus="gogo(this);"/></a>
+	        </div>
+	        <div class="rowS">
+	            <a id="I" class="name" onclick="hhhh(this)">平台IP</a>
+	            <a class="second"><input type="text" oninput="inputChange(this)" onfocus="gogo(this);"/></a>
+	        </div>
+	        <div class="rowS">
+	            <a id="E" class="name" onclick="hhhh(this)">平台端口</a>
+	            <a class="second"><input type="text" oninput="inputChange(this)" onfocus="gogo(this);"/></a>
+	        </div>
+	        <div class="rowS">
+	            <a id="L" class="name" onclick="hhhh(this)">车牌号</a>
+	            <a class="second"><input type="text" oninput="inputChange(this)" onfocus="gogo(this);"/></a>
+	        </div>
+	        <div id="tag" class="rowS">
+	            <a id="C" class="name" onclick="hhhh(this)">车牌颜色</a>
+	            <a class="second"><input type="text" oninput="inputChange(this)" onfocus="gogo(this);"/></a>
+	        </div>
+	        
+	        <button id="gaiji1" onclick="gaoj()">高级</button>
+	    </ul>
+	    
+	    
+	    <button class="setBtn" onclick="setting()">设置</button>
+	    
+	    <script>
+	    	function gogo(op)
+	    	{
+	    		op.parentElement.scrollIntoView();
+	    		
+	    	}
+	    	//显示灰色 jQuery 遮罩层 
+	    	function showSuccess() {
+	    		var bh = jQuery("body").height();
+	    		var bw = jQuery("body").width();
+	    		jQuery("#fullbg").css({ height:bh, width:bw, display:"block" });
+	    		jQuery("#dialog div").css({'background-image':'url(images/success.png)'});
+	    		jQuery('#dialog div p').text('设置成功');
+	    		jQuery("#dialog").show();
+	    	}
+	    	function showFail(){
+	    		var bh = jQuery("body").height();
+	    		var bw = jQuery("body").width();
+	    		jQuery("#fullbg").css({ height:bh, width:bw, display:"block" });
+	    		jQuery("#dialog div").css({'background-image':'url(images/fail.png)'});
+	    		jQuery('#dialog div p').text('设置失败');
+	    		jQuery('#dialog').show();
+	    	}
+	    	//关闭灰色 jQuery 遮罩
+	    	function closeBg() {
+	    		jQuery("#fullbg,#dialog").hide();
+	    	}
+	    	    jQuery(document).ready(function(){
+	    	    	    if(sessionStorage.length)
+	    	    	    {
+	    	    	    	    
+						
+						jQuery('#T').next().children().val(sessionStorage.getItem('ca_T'))
+						jQuery('#I').next().children().val(sessionStorage.getItem('ca_I'))
+						jQuery('#E').next().children().val(sessionStorage.getItem('ca_E'))
+						if (sessionStorage.getItem('ca_LC') != '')
+						{
+							var arr = sessionStorage.getItem('ca_LC').split('|');
+							jQuery('#L').next().children().val(arr[0])
+							jQuery('#C').next().children().val(arr[1])
+						}
+						
+	    	    	    }
+	    	    })
+	    	    
+	    	    function setting(){
+	    	    
+	    	    	    var po = '';
+	    	    	    jQuery('.name2').each(function(){
+	    	    	    	    
+	    	    	    	    if (jQuery(this).text() == '工作模式')
+	    	    	    	    {
+	    	    	    	    	    if (document.getElementById('mo1').className == 'mo1p')
+	    	    	    	    	    {
+	    	    	    	    	    	    po += this.id + ':1';
+	    	    	    	    	    }
+	    	    	    	    	    else
+	    	    	    	    	    {
+	    	    	    	    	    	    po += this.id + ':0';
+	    	    	    	    	    }
+	    	    	    	    }
+	    	    	    	    else if (jQuery(this).text() == '基站服务器开启')
+	    	    	    	    {
+	    	    	    	    	    if (jQuery(this).next().children().attr('class') == 'open')
+	    	    	    	    	    {
+	    	    	    	    	    	    po += this.id + ':1';
+	    	    	    	    	    }
+	    	    	    	    	    else
+	    	    	    	    	    {
+	    	    	    	    	    	    po += this.id + ':0';
+	    	    	    	    	    }
+	    	    	    	    }
+	    	    	    	    else
+	    	    	    	    {
+	    	    	    	    	    po += this.id + ':' + jQuery(this).next().children().val();
+	    	    	    	    }
+	    	    	    })
+	    	    	    android.sendData('$PWISDOM,SP' + po + '#');
+	    	    }
+	    	    
+	    	    function aass(opt){
+	    	    	    var n = 0;
+	    	    	    jQuery(':text').each(function(){
+	    	    	    	    if (jQuery(this).val() == '')
+	    	    	    	    {
+	    	    	    	    	    mui.toast('请确保所有选项均有参数',{duration:'long',type:'div'});
+	    	    	    	    	    n = 1;
+	    	    	    	    	    return false;
+	    	    	    	    }
+	    	    	    })
+	    	    	    
+	    	    	    if (n == 1)return;
+	    	    	    
+	    	    	    if (opt.className == 'set_subTitle_button')
+	    	    	    {
+	    	    	    	    jQuery('#allSelect').removeClass('set_subTitle_button').addClass('set_subTitle_button2');
+	    	    	    	    jQuery('.name').removeClass('name').addClass('name2');
+	    	    	    }
+	    	    	    else
+	    	    	    {
+	    	    	    	    jQuery('#allSelect').removeClass('set_subTitle_button2').addClass('set_subTitle_button');
+	    	    	    	    jQuery('.name2').removeClass('name2').addClass('name');
+	    	    	    }
+	    	    }
+	    	    
+	    	    function inputChange(sg){
+	    	    	    if (jQuery(sg).val() == '')
+	    	    	    {
+	    	    	    	    jQuery(sg).parent().prev().removeClass('name2').addClass('name')
+	    	    	    }
+	    	    	    else
+	    	    	    {
+	    	    	    	    jQuery(sg).parent().prev().removeClass('name').addClass('name2')
+	    	    	    }
+	    	    	    if (jQuery('.name').length == 0)
+	    	    	    {
+	    	    	    	    jQuery('#allSelect').removeClass('set_subTitle_button').addClass('set_subTitle_button2');
+	    	    	    }
+	    	    	    else
+	    	    	    {
+	    	    	    	    jQuery('#allSelect').removeClass('set_subTitle_button2').addClass('set_subTitle_button');
+	    	    	    }
+	    	    }
+	    	    
+	    	    function hhhh(option){
+	    	    	    if (jQuery(option).next().children().val() == '')
+	    	    	    {
+	    	    	    	    if (jQuery(option).text() == '工作模式' || jQuery(option).text() == '基站服务器开启')
+	    	    	    	    {
+	    	    	    	    	    
+	    	    	    	    }
+	    	    	    	    else
+	    	    	    	    {
+	    	    	    	    	    mui.toast('请先输入参数',{duration:'long',type:'div'});
+	    	    	    	    	    return;
+	    	    	    	    }
+	    	    	    }
+	    	    	    if (option.className == 'name'){
+	    	    	    	    option.className = 'name2';
+	    	    	    }
+	    	    	    else{
+	    	    	    	    option.className = 'name';
+	    	    	    }
+	    	    	    
+	    	    	    if (jQuery('.name').length == 0)
+	    	    	    {
+	    	    	    	    jQuery('#allSelect').removeClass('set_subTitle_button').addClass('set_subTitle_button2');
+	    	    	    }
+	    	    	    else
+	    	    	    {
+	    	    	    	    jQuery('#allSelect').removeClass('set_subTitle_button2').addClass('set_subTitle_button');
+	    	    	    }
+	    	    	    
+	    	    }
+	    	    
+	    	    function changeM(option){
+	    	    	    jQuery(option).parent().prev().removeClass('name').addClass('name2')
+	    	    	    if (option.className == 'mo1p' || option.className == 'mo2p')
+	    	    	    {
+	    	    	    	    document.getElementById('mo1').className = 'mo1';
+	    	    	    	    document.getElementById('mo2').className = 'mo2';
+	    	    	    }
+	    	    	    else
+	    	    	    {
+	    	    	    	    document.getElementById('mo1').className = 'mo1p';
+	    	    	    	    document.getElementById('mo2').className = 'mo2p';
+	    	    	    }
+	    	    	    
+	    	    	    if (jQuery('.name').length == 0)
+	    	    	    {
+	    	    	    	    jQuery('#allSelect').removeClass('set_subTitle_button').addClass('set_subTitle_button2');
+	    	    	    }
+	    	    	    else
+	    	    	    {
+	    	    	    	    jQuery('#allSelect').removeClass('set_subTitle_button2').addClass('set_subTitle_button');
+	    	    	    }
+	    	    }
+	    	    
+	    	    function open_close(btn){
+	    	    	    jQuery(btn).parent().prev().removeClass('name').addClass('name2');
+	    	    	    if (btn.className == 'close'){
+	    	    	    	    btn.className = 'open';
+	    	    	    }
+	    	    	    else
+	    	    	    {
+	    	    	    	    btn.className = 'close';
+	    	    	    }
+	    	    	    
+	    	    	    if (jQuery('.name').length == 0)
+	    	    	    {
+	    	    	    	    jQuery('#allSelect').removeClass('set_subTitle_button').addClass('set_subTitle_button2');
+	    	    	    }
+	    	    	    else
+	    	    	    {
+	    	    	    	    jQuery('#allSelect').removeClass('set_subTitle_button2').addClass('set_subTitle_button');
+	    	    	    }
+	    	    }
+	    	    
+	    	    var secondHTML = '';
+	    	    function gaoj(){
+	    	    	    if (secondHTML == '')
+	    	    	    {
+	    	    	    	    jQuery('#gaiji1').remove();
+	    	    	    	jQuery('#pppp').append('<div></div><div class="rowS"><a id="W" class="name" onclick="hhhh(this)">工作模式</a>\n<a class="second"><button id="mo1" onclick="changeM(this)" class="mo1">正常模式</button><button id="mo2" onclick="changeM(this)" class="mo2">作息表模式</button></a></div>' +
+	        '<div class="rowS"><a id="R" class="name" onclick="hhhh(this)">汇报间隔</a>\n<a class="second"><input type="text" oninput="inputChange(this)" onfocus="gogo(this);"/></a></div>' +
+	        '<div class="rowS"><a id="7" class="name" onclick="hhhh(this)">汇报基本时间</a>\n<a class="second"><input type="text" oninput="inputChange(this)" onfocus="gogo(this);"/></a></div>' +
+	        '<div class="rowS"><a id="N" class="name" onclick="hhhh(this)">追车时长</a>\n<a class="second"><input type="text" oninput="inputChange(this)" onfocus="gogo(this);"/></a></div>' +
+	        '<div class="rowS"><a id="s" class="name" onclick="hhhh(this)">基站服务器开启</a>\n<a class="second"><button class="close" onclick="open_close(this)"></button></a></div>' +
+	        '<div class="rowS"><a id="i" class="name" onclick="hhhh(this)">基站服务器IP</a>\n<a class="second"><input type="text" oninput="inputChange(this)" onfocus="gogo(this);"/></a></div>' +
+	        '<div class="rowS"><a id="e" class="name" onclick="hhhh(this)">基站服务器端口</a>\n<a class="second"><input type="text" oninput="inputChange(this)" onfocus="gogo(this);" /></a></div>' +
+	        '<div class="rowS"><a id="A" class="name" onclick="hhhh(this)">APN</a>\n<a class="second"><input type="text" oninput="inputChange(this)" onfocus="gogo(this);"/></a></div>' +
+	        '<button onclick="zhuxiao()" style="width: 50%; height: 35px;background: url(images/zhuxiao.png) no-repeat;background-position: center;background-size: contain;border: none;"></button><button onclick="fuwei()" style="width: 50%; height: 35px;background: url(images/fuwei.png) no-repeat;background-position: center;background-size: contain;border: none;"></button>' + 
+	        '<button id="shouqi1" onclick="shou()">收起</button>');
+	            jQuery('#allSelect').removeClass('set_subTitle_button2').addClass('set_subTitle_button');
+	    	    	    }
+	    	    	    else
+	    	    	    {
+	    	    	    	jQuery('#gaiji1').remove();
+	    	    	    	var ha = '<div></div>' + secondHTML;
+	    	    	    	jQuery('#pppp').append(ha);
+	    	    	    	jQuery('#allSelect').removeClass('set_subTitle_button2').addClass('set_subTitle_button');
+	    	    	    }
+	    	    	    
+	    	    	    
+	    	    	    
+	    	    	    if(sessionStorage.length)
+	    	    	    {
+	    	    	    	    
+						if (sessionStorage.getItem('ca_W') == '正常模式')
+						{
+							document.getElementById('mo1').className = 'mo1';
+							document.getElementById('mo2').className = 'mo2';
+						}
+						else if (sessionStorage.getItem('ca_W') == '作息表模式')
+						{
+							document.getElementById('mo1').className = 'mo1p';
+							document.getElementById('mo2').className = 'mo2p';
+						}
+						
+						jQuery('#7').next().children().val(sessionStorage.getItem('ca_7'))
+						jQuery('#R').next().children().val(sessionStorage.getItem('ca_R'))
+						
+						jQuery('#N').next().children().val(sessionStorage.getItem('ca_N'))
+						jQuery('#B').next().children().val(sessionStorage.getItem('ca_B'))
+						jQuery('#A').next().children().val(sessionStorage.getItem('ca_A'))
+						jQuery('#i').next().children().val(sessionStorage.getItem('ca_i'))
+						jQuery('#e').next().children().val(sessionStorage.getItem('ca_e'))
+						
+						if (sessionStorage.getItem('ca_s') == '1')
+						{
+							jQuery('#s').next().children().attr({'class':'open'});
+						}
+						else if (sessionStorage.getItem('ca_s') == '0')
+						{
+							jQuery('#s').next().children().attr({'class':'close'});
+						}
+	    	    	    }
+	    	    }
+	    	    
+	    	    function shou(){
+	    	    	    secondHTML = document.getElementById('pppp').innerHTML.split('<div></div>')[1];
+	    	    	    jQuery('#tag').nextAll().remove();
+	    	    	    jQuery('#pppp').append('<button id="gaiji1" onclick="gaoj()">高级</button>')
+	    	    	    if (jQuery('.name').length == 0)
+	    	    	    {
+	    	    	    	    jQuery('#allSelect').removeClass('set_subTitle_button').addClass('set_subTitle_button2');
+	    	    	    }
+	    	    	    
+	    	    	}
+	    	    
+	    	    function zhuxiao(){
+	    	    	    android.sendData('$PWISDOM,LO#');
+	    	    }
+	    	    
+	    	    function fuwei(){
+	    	    	    android.sendData('$PWISDOM,RT#');
+	    	    }
+	    	    
+	    </script>
+	</body>
+</html>

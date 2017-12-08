@@ -1,0 +1,312 @@
+
+.title2 {
+    margin: 2px;
+    height: 45px;
+
+    background: url(../images/version.png) no-repeat;
+}
+
+.title2 p, .title2 select {
+    display: inline-block;
+}
+
+.title2 p {
+    padding-bottom: 15px;
+    padding-top: 15px;
+    margin-left: 50px;
+    color: white;
+}
+
+.title2 select {
+    width: auto;
+    height: 30px;
+    color: white;
+
+    border-radius: 0;
+    padding: 5px;
+    font-size: 15px;
+    border: 1px solid #dfe1f5;
+    color: white;
+    background: transparent;
+    margin-bottom: 0;
+    vertical-align: middle;
+    -webkit-appearance: none;
+    background: url(../images/version_last.png) no-repeat;
+    background-position: 100% center;
+    background-size: 15px 15px;
+    padding-right: 15px;
+}
+
+.title2 select option {
+    background-color: rgb(200, 200, 200);
+}
+
+#main {
+    margin-top: 3px;
+
+}
+
+#fullselect, #reset, #socket {
+    float: left;
+}
+
+#fullselect {
+    width: 106px;
+    height: 40px;
+    /*background: url(../images/btn_check-all_1.png);*/
+    margin-left: 10px;
+
+}
+
+#reset, #socket {
+    width: 106px;
+    height: 40px;
+    margin-left: 5px;
+    /*background: url(../images/btn_reset.png);*/
+}
+
+.btnSocket {
+    background: url(../images/btn_link_ed.png);
+}
+
+.btnNormol {
+    background: url(../images/btn_link.png);
+}
+
+.topBtnr {
+    background: url(../images/btn_reset.png);
+}
+
+.topBtns {
+    background: url(../images/btn_check-all_1.png);
+}
+
+.topBtns2 {
+    background: url(../images/btn_check-all_2.png);
+}
+
+.list_body {
+    /*position: absolute;*/
+
+    margin-left: 0;
+    margin-top: 45px;
+    /*left: 0px;*/
+    /*bottom: 80px;*/
+    padding: 0 10px 10px 10px;
+    height: 420px;
+    width: 96%;
+    /*max-height: calc(100% - 150px);*/
+    overflow: auto;
+    border: 0.5px solid rgba(0, 0, 0, 0);
+    border-radius: 5px;
+
+}
+
+.bottomBtn {
+    /*position: absolute;*/
+
+    /*bottom: 5px;*/
+    float: left;
+}
+
+/*#div_page {*/
+    /*position: absolute;*/
+    /*bottom: 70px;*/
+    /*left: 48%;*/
+/*}*/
+
+/*style="position: absolute;left: 50px;top: 10px;background-color: #1b9fff;color: white; width: 100px"*/
+#btn_bote {
+    position: absolute;
+    left: 50px;
+    top: 10px;
+    background-color: #1b9fff;
+    color: white;
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    padding-top: 5px;
+    border: 0px;
+}
+
+#btn_bote1 {
+    position: absolute;
+    left: 160px;
+    top: 10px;
+    background-color: #1b9fff;
+    color: white;
+    width: 50px;
+    height: 30px;
+    text-align: center;
+    padding-top: 5px;
+    border: 0px;
+}
+#btn_bote2 {
+    position: absolute;
+    left: 220px;
+    top: 10px;
+    background-color: #1b9fff;
+    color: white;
+    width: 50px;
+    height: 30px;
+    text-align: center;
+    padding-top: 5px;
+    border: 0px;
+}
+#btn_bote3 {
+    position: absolute;
+    left: 280px;
+    top: 10px;
+    background-color: #1b9fff;
+    color: white;
+    width: 50px;
+    height: 30px;
+    text-align: center;
+    padding-top: 5px;
+    border: 0px;
+}
+.page {
+    /*position: absolute;*/
+    /*bottom: 70px;*/
+    float: left;
+}
+
+#writbtn, #querybtn {
+    float: left;
+
+}
+
+#writbtn {
+    left: 30px;
+    background: url(../images/btn_write-in.png) no-repeat;
+    background-size: 140px 42px;
+    width: 140px;
+    height: 42px;
+
+}
+
+#querybtn {
+    right: 30px;
+    background: url(../images/btn_search.png) no-repeat;
+    background-size: 140px 42px;
+    width: 140px;
+    height: 42px;
+
+}
+
+.rowS {
+    border-width: 1px;
+    border-style: solid;
+    border-color: gainsboro;
+
+    padding-bottom: 10px;
+    padding-top: 10px;
+    background-color: white;
+    margin-bottom: 10px;
+
+}
+
+.rowSs {
+    border-width: 1px;
+    border-style: solid;
+    border-color: gainsboro;
+
+    padding-bottom: 10px;
+    padding-top: 10px;
+    background-color: white;
+    background: url(../images/checkbox_success.png) no-repeat right;
+    background-size: 15px 15px;
+    margin-bottom: 10px;
+}
+
+.rowSf {
+    border-width: 1px;
+    border-style: solid;
+    border-color: gainsboro;
+
+    padding-bottom: 10px;
+    padding-top: 10px;
+    background-color: white;
+    background: url(../images/checkbox_failed.png) no-repeat right;
+    background-size: 15px 15px;
+    margin-bottom: 10px;
+
+}
+
+.name {
+    background: url(../images/checkbox_normal.png) no-repeat;
+    background-position: 0 center;
+    background-size: 15px 15px;
+
+    display: inline-block;
+    padding-left: 20px;
+    color: #000000;
+    vertical-align: middle;
+    width: 100px;
+    margin-left: 5px;
+}
+
+.name2 {
+    background: url(../images/checkbox_selected.png) no-repeat;
+    background-position: 0 center;
+    background-size: 15px 15px;
+
+    display: inline-block;
+    padding-left: 20px;
+    color: #000000;
+    vertical-align: middle;
+    width: 100px;
+    margin-left: 5px;
+}
+
+.name3 {
+    background: url(../images/checkbox_success.png) no-repeat;
+    background-position: 0 center;
+    background-size: 15px 15px;
+
+    display: inline-block;
+    padding-left: 20px;
+    color: #000000;
+    vertical-align: middle;
+    width: 100px;
+    margin-left: 5px;
+}
+
+.name4 {
+    background: url(../images/checkbox_failed.png) no-repeat;
+    background-position: 0 center;
+    background-size: 15px 15px;
+
+    display: inline-block;
+    padding-left: 20px;
+    color: #000000;
+    vertical-align: middle;
+    width: 100px;
+    margin-left: 5px;
+}
+
+.second {
+
+    display: inline-block;
+    border-left-style: solid;
+    border-left-width: 0.5px;
+    border-left-color: #B6B6B6;
+
+}
+
+.second input {
+    vertical-align: middle;
+    margin-top: 2px;
+
+    color: #8F8F94;
+
+}
+
+.second select {
+    width: 220px;
+
+    text-align: center;
+    vertical-align: middle;
+    margin-bottom: 2px;
+    color: #8F8F94;
+}

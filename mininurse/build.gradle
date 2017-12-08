@@ -1,0 +1,105 @@
+apply plugin: 'com.android.application'
+
+def releaseTime() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
+}
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+
+    //v23以上需添加
+    aaptOptions.cruncherEnabled = false
+    aaptOptions.useNewCruncher = false
+
+    defaultConfig {
+        applicationId "com.hst.mininurse"
+        minSdkVersion 16
+        targetSdkVersion 21
+        versionCode 1
+        versionName "1.1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        useLibrary 'org.apache.http.legacy'
+        multiDexEnabled true
+//        flavorDimensions "versionCode"
+    }
+
+    signingConfigs {
+        debug {
+            keyAlias 'szhst2012v10'
+            keyPassword 'SZHst2012'
+            storeFile file('../GPSCheck.keystore')
+            storePassword 'SZHst2012'
+        }
+        release {
+            keyAlias 'szhst2012v10'
+            keyPassword 'SZHst2012'
+            storeFile file('../GPSCheck.keystore')
+            storePassword 'SZHst2012'
+        }
+    }
+
+    productFlavors {
+        Mininurse3 {}
+//        xiaomi{}
+//        huawei{}
+//        anzhi{}
+    }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                //这里修改apk文件名
+                //   def fileName = "demo_${variant.productFlavors[0].name}-${defaultConfig.versionCode}-${defaultConfig.versionName}-${releaseTime() }.apk"
+                def fileName = "${variant.productFlavors[0].name}-${defaultConfig.versionCode}-${defaultConfig.versionName}-${releaseTime()}-release.apk"
+                output.outputFile = new File(outputFile.parent, fileName)
+//                output.outputFile = new File(rootDir/build/output/apk,fileName)
+            }
+        }
+    }
+
+//    applicationVariants.all { variant ->    //批量修改Apk名字
+//        variant.outputs.all { output ->
+//            if (!variant.buildType.isDebuggable()) {
+//                //获取签名的名字 variant.signingConfig.name
+//                //要被替换的源字符串
+//                def sourceFile = "-${variant.flavorName}-${variant.buildType.name}"
+//                //替换的字符串
+//                def replaceFile = "_V${variant.versionName}_${variant.flavorName}_${variant.buildType.name}_${releaseTime() }"
+//                outputFileName = output.outputFile.name.replace(sourceFile, replaceFile);
+//                //遗留问题：如何获取当前module的name，如CodeBooke这个名字怎么获取到
+//            }
+//        }
+//    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+
+        }
+        
+    }
+//    lintOptions {
+//        checkReleaseBuilds false
+//        // Or, if you prefer, you can continue to check for errors in release builds,
+//        // but continue the build even when errors are found:
+//        abortOnError false
+//        disable 'MissingTranslation'
+//    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+//    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+//        exclude group: 'com.android.support', module: 'support-annotations'
+//    })
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
+//    compile 'com.zhy:okhttputils:2.6.2'
+//    compile 'com.google.code.gson:gson:2.8.1'
+}

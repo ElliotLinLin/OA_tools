@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:background="@color/little_gray"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+    <TextView
+        android:textColor="@color/black"
+        android:id="@+id/tv"
+        android:textSize="@dimen/dp_20"
+        android:gravity="center"
+        android:text="请选择波特率和校验位"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"/>
+    <RelativeLayout
+        android:layout_below="@id/tv"
+        android:id="@+id/rl_1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50">
+
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/bote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_margin="@dimen/dp_10"
+            android:text="波特率"
+            android:textSize="@dimen/dp_18"/>
+
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/et_bote"
+            style="@null"
+            android:drawableRight="@drawable/gaoji"
+            android:paddingRight="@dimen/dp_20"
+            android:text="115200"
+            android:textSize="@dimen/dp_20"
+            android:gravity="center_vertical"
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/bote"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_below="@id/rl_1">
+
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/parity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_margin="@dimen/dp_10"
+            android:text="校验位"
+            android:textSize="@dimen/dp_18"/>
+
+        <TextView
+            android:inputType="number"
+            android:textColor="@color/black"
+            android:id="@+id/et_parity"
+            style="@null"
+            android:drawableRight="@drawable/gaoji"
+            android:paddingRight="@dimen/dp_20"
+            android:text="none"
+            android:textSize="@dimen/dp_20"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@id/parity"
+            />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn"
+        android:text="确定"
+        android:layout_below="@id/rl_2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"/>
+</RelativeLayout>

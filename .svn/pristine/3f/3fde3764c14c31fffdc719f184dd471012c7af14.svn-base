@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link rel="stylesheet" type="text/css" href="css/header.css"/>
+    <link href="css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/alert.css"/>
+    <script type="text/javascript" src="js/mui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/index2.css"/>
+    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+
+    <script type="text/javascript" src="js/fff.js"></script>
+    <title>2</title>
+    <script src="js/mui.min.js"></script>
+    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="js/json2.js"></script>
+    <link href="css/mui.min.css" rel="stylesheet"/>
+    <script>
+
+        function sendData(data) {
+
+//          var elementById = document.getElementById("content");
+//          elementById.innerHTML = data;
+            var jsonstr = data;
+//			alert(jsonstr);
+            var termConfig = JSON.parse(jsonstr);
+            controlGroups = termConfig.DynamicControl.ControlGroups;
+            numPerPage = termConfig.DynamicControl.NumberPerPage;
+            numPerPage = parseInt(numPerPage);
+//			alert(''+controlGroups.length);
+//			alert(jsonstr);
+            loaded();
+
+
+        }
+
+        //		document.addEventListener('DOMContentLoaded', loaded, false);
+        var controlGroups;//配置文件中的所有配置项
+        var numPerPage = 5;//每页信息条数
+        var numpags = 1;//总页数
+        var currentPageIndex = 0;//当前页
+        var allselect = new Array();//所有的选中项
+        var allselectQ = new Array();//选中项中带有查询操作的项
+        var allselectW = new Array();//选中项中带有写入操作的项
+        var queryDatas = new Array();//所有查询到的数据
+        var loadtime = 0;//页面加载的次数
+        var isRWdata = false;//是否正在读写数据
+        function loaded() {
+            if (loadtime != 0) {
+                return;
+            }
+            loadtime++;
+//			var jsonstrold-pass ='{"configSections":{"section":{"name":"DynamicControl","type":"WisdomDetectionTool.DynamicControl.Models.DynamicControlModel, WisdomDetectionTool"}},"dynamicControl":{"CheckSuccessText":"1","IsMultiCheck":"True","NumberPerPage":"10","controlGroups":[{"ButtonText1":"设置","ButtonText2":"查询","Checked":"True","Content1":"*91#[IP地址]","Content2":"*206#","Title":"新能源IP","controls":{"control":{"ControlType":"TextBox","Name":"端口","Value":"1234"}}},{"ButtonText1":"设置","Checked":"False","Content1":"*96#[端口]","Title":"新能源端口","controls":{"control":{"ControlType":"TextBox","Name":"IP地址","Value":"220.178.32.20"}}},{"ButtonText1":"设置","ButtonText2":"查询","Checked":"True","Content1":"*12#[颜色]","Content2":"*204#","Title":"车牌颜色","controls":{"control":{"ControlType":"TextBox","Name":"端口","Value":"4007"}}},{"ButtonText1":"设置","Content1":"*101#[车型]","Title":"新能源车型","controls":{"control":{"ControlType":"ComboBox","Data":"1:蓝色,2:黄色,3:黑色,4:白色,9:其它","Name":"颜色","Value":"2"}}},{"ButtonText1":"查询","Content1":"*203#","Title":"通讯状态","controls":{"control":{"Checked":"True","ControlType":"ComboBox","Data":"0:无车型,1:混合动力松正,2:混合动力绿控,3:安凯纯电动,4:安凯混动","Name":"车型","Value":"1"}}},{"ButtonText1":"发送","Content1":"","Title":"超级命令","controls":{"control":{"ControlType":"TextBox","Enable":"False","Name":"","Value":"查询APN、ACC、电话卡状态、网络注册情况"}}}]}}';
+//			var jsonstr ='{"configSections":{"section":{"name":"DynamicControl","type":"WisdomDetectionTool.DynamicControl.Models.DynamicControlModel, WisdomDetectionTool"}},"dynamicControl":{"CheckSuccessText":"1","IsMultiCheck":"True","NumberPerPage":"10","controlGroups":[{"ButtonText1":"设置","ButtonText2":"查询","Checked":"True","Content1":"*91#[IP地址]","Content2":"*206#","Title":"新能源IP","controls":{"control":{"ControlType":"TextBox","Name":"IP地址","Value":"192.168.1.3"}}},{"ButtonText1":"设置","Checked":"False","Content1":"*96#[端口]","Title":"新能源端口","controls":{"control":{"ControlType":"TextBox","Name":"端口","Value":"1234"}}},{"ButtonText1":"设置","ButtonText2":"查询","Checked":"True","Content1":"*12#[颜色]","Content2":"*204#","Title":"车牌颜色","controls":{"control":{"ControlType":"TextBox","Name":"端口","Value":"4007"}}},{"ButtonText1":"设置","Content1":"*101#[车型]","Title":"新能源车型","controls":{"control":{"ControlType":"ComboBox","Data":"1:蓝色,2:黄色,3:黑色,4:白色,9:其它","Name":"颜色","Value":"2"}}},{"ButtonText1":"查询","Content1":"*203#","Title":"通讯状态","controls":{"control":{"Checked":"True","ControlType":"ComboBox","Data":"0:无车型,1:混合动力松正,2:混合动力绿控,3:安凯纯电动,4:安凯混动","Name":"车型","Value":"1"}}},{"ButtonText1":"发送","Content1":"","Title":"超级命令","controls":{"control":{"ControlType":"TextBox","Enable":"False","Name":"","Value":"查询APN、ACC、电话卡状态、网络注册情况"}}}]}}';
+
+//			var jsonstr='{"DynamicControl":{"CheckSuccessText":"1","ControlGroups":[{"ButtonText1":"设置","ButtonText2":"查询","Checked":"True","Content1":"*91#[IP地址]","Content2":"*206#","Controls":{"Control":{"ControlType":"TextBox","Name":"IP地址","Value":"220.178.32.20"}},"Title":"IP地址"},{"ButtonText1":"设置","Checked":"False","Content1":"*96#[端口]","Controls":{"Control":{"ControlType":"TextBox","Name":"端口","Value":"4007"}},"Title":"端口"},{"ButtonText1":"设置","ButtonText2":"查询","Checked":"True","Content1":"*12#[颜色]","Content2":"*204#","Controls":{"Control":{"ControlType":"ComboBox","Data":"1:蓝色,2:黄色,3:黑色,4:白色,9:其它","Name":"颜色","Value":"2"}},"Title":"车牌颜色"},{"ButtonText1":"设置","Content1":"*101#[车型]","Controls":{"Control":{"Checked":"True","ControlType":"ComboBox","Data":"0:无车型,1:混合动力松正,2:混合动力绿控,3:安凯纯电动,4:安凯混动","Name":"车型","Value":"1"}},"Title":"车型"},{"ButtonText1":"查询","Content1":"*203#","Controls":{"Control":{"ControlType":"TextBox","Enable":"False","Name":"","Value":"查询APN、ACC、电话卡状态、网络注册情况"}},"Title":"状态"}],"IsMultiCheck":"True","NumberPerPage":"10"},"configSections":{"section":{"name":"DynamicControl","type":"WisdomDetectionTool.DynamicControl.Models.DynamicControlModel, WisdomDetectionTool"}}}';
+
+//			var jsonstr=' {"DynamicControl":{"CheckSuccessText":"1","ControlGroups":[{"ButtonText1":"发送","Content1":"","Controls":{"Control":{"ControlType":"TextBox","Name":"","Value":""}},"Title":"超级命令"},{"ButtonText1":"设置","ButtonText2":"查询","Checked":"True","Content1":"*91#[IP地址]","Content2":"*206#","Controls":{"Control":{"ControlType":"TextBox","Name":"IP地址","Value":"220.178.32.20"}},"Title":"能源IP"},{"ButtonText1":"设置","Checked":"False","Content1":"*96#[端口]","Controls":{"Control":{"ControlType":"TextBox","Name":"端口","Value":"4007"}},"Title":"能源端口"},{"ButtonText1":"设置","ButtonText2":"查询","Checked":"True","Content1":"*12#[颜色]","Content2":"*204#","Controls":{"Control":{"ControlType":"ComboBox","Data":"1:蓝色,2:黄色,3:黑色,4:白色,9:其它","Name":"颜色","Value":"2"}},"Title":"车牌颜色"},{"ButtonText1":"设置","ButtonText2":"查询","Checked":"True","Content1":"*12#[颜色]","Content2":"*204#","Controls":{"Control":{"ControlType":"ComboBox","Data":"1:蓝色,2:黄色,3:黑色,4:白色,9:其它","Name":"颜色","Value":"2"}},"Title":"车牌颜色"},{"ButtonText1":"设置","Content1":"*101#[车型]","Controls":{"Control":{"Checked":"True","ControlType":"ComboBox","Data":"0:无车型,1:混合动力松正,2:混合动力绿控,3:安凯纯电动,4:安凯混动","Name":"车型","Value":"1"}},"Title":"能源车型"},{"ButtonText1":"查询","Content1":"*203#","Controls":{"Control":{"ControlType":"TextBox","Enable":"False","Name":"","Value":"查询APN、ACC、电话卡状态、网络注册情况"}},"Title":"通讯状态"},{"ButtonText1":"发送","Content1":"","Controls":{"Control":{"ControlType":"TextBox","Name":"","Value":""}},"Title":"超级命令"}],"IsMultiCheck":"True","NumberPerPage":"10"},"configSections":{"section":{"name":"DynamicControl","type":"WisdomDetectionTool.DynamicControl.Models.DynamicControlModel, WisdomDetectionTool"}}}';
+//			var jsonstr='{"DynamicControl":{"CheckSuccessText":"1","ControlGroups":[{"ButtonText1":"设置","ButtonText2":"查询","Content1":"*8888*91#[IP]","Content2":"*8888*#90#","Controls":{"Control":{"ControlType":"TextBox","Name":"IP","Value":""}},"Title":"新能源平台"},{"ButtonText1":"设置","ButtonText2":"查询","Content1":"pramwt\u003d2000003D#[端口]","Content2":"pramrd\u003d2000003D","Controls":{"Control":{"ControlType":"TextBox","Name":"端口","Value":""}},"Title":"新能源端口"},{"ButtonText1":"设置","ButtonText2":"查询","Content1":"pramwt\u003d20000001#[号码]","Content2":"pramrd\u003d20000001","Controls":{"Control":{"ControlType":"TextBox","Name":"号码","Value":""}},"Title":"通讯号"},{"ButtonText1":"设置","ButtonText2":"查询","Content1":"pramwt\u003d00000083#车牌","Content2":"pramrd\u003d00000083","Controls":{"Control":{"ControlType":"TextBox","Name":"车牌","Value":""}},"Title":"车牌号码"},{"ButtonText1":"设置","ButtonText2":"查询","Content1":"pramwt\u003d00000084#[颜色]","Content2":"pramrd\u003d00000084","Controls":{"Control":{"ControlType":"ComboBox","Data":"1:蓝色,2:黄色,3:黑色,4:白色,9:其他","Name":"颜色","Value":"2"}},"Title":"车牌颜色"},{"ButtonText1":"设置","ButtonText2":"查询","Content1":"pramwt\u003d20000017#[VIN]","Content2":"pramrd\u003d20000017","Controls":{"Control":{"ControlType":"TextBox","Name":"VIN","Value":""}},"Title":"车架号"},{"ButtonText1":"设置","ButtonText2":"查询","Content1":"pramwt\u003d1000010A#[车型]","Content2":"pramrd\u003d1000010A","Controls":{"Control":{"ControlType":"ComboBox","Data":"0、无车型,1、松正混动,2、绿控混动,3、安凯纯电动,4、安凯自主混动,5、松正4代混动,6、沃特玛纯电,7、长春-亚星纯电,8、伊顿,9、氢燃料","Name":"车型","Value":"0"}},"Title":"新能源车型"}],"IsMultiCheck":"True","NumberPerPage":"10"},"configSections":{"section":{"name":"DynamicControl","type":"WisdomDetectionTool.DynamicControl.Models.DynamicControlModel, WisdomDetectionTool"}}}';
+//			var jsonstr='{"DynamicControl":{"CheckSuccessText":"1","ControlGroups":[{"ButtonText1":"查询","Content1":"*8888*202#","Controls":{"Control":{"ControlType":"TextBox","Enable":"False","Name":"","Value":"设备自检..."}},"Title":"设备自检"},{"ButtonText1":"查询","Content1":"verwis","Controls":{"Control":{"ControlType":"TextBox","Enable":"False","Name":"","Value":"查询版本信息"}},"Title":"版本信息"},{"ButtonText1":"设置","ButtonText2":"查询","Content1":"*8888*91#[IP]","Content2":"*8888*#90#","Controls":{"Control":{"ControlType":"TextBox","Name":"IP","Value":""}},"Title":"新能源平台"},{"ButtonText1":"设置","ButtonText2":"查询","Content1":"pramwt\u003d2000003D#[端口]","Content2":"pramrd\u003d2000003D","Controls":{"Control":{"ControlType":"TextBox","Name":"端口","Value":""}},"Title":"新能源端口"},{"ButtonText1":"设置","ButtonText2":"查询","Content1":"pramwt\u003d20000001#[号码]","Content2":"pramrd\u003d20000001","Controls":{"Control":{"ControlType":"TextBox","Name":"号码","Value":""}},"Title":"通讯号"},{"ButtonText1":"设置","ButtonText2":"查询","Content1":"pramwt\u003d00000083#[车牌]","Content2":"pramrd\u003d00000083","Controls":{"Control":{"ControlType":"TextBox","Name":"车牌","Value":""}},"Title":"车牌号码"},{"ButtonText1":"设置","ButtonText2":"查询","Content1":"pramwt\u003d00000084#[颜色]","Content2":"pramrd\u003d00000084","Controls":{"Control":{"ControlType":"ComboBox","Data":"1:蓝色,2:黄色,3:黑色,4:白色,9:其他","Name":"颜色","Value":"2"}},"Title":"车牌颜色"},{"ButtonText1":"设置","ButtonText2":"查询","Content1":"pramwt\u003d20000017#[VIN]","Content2":"pramrd\u003d20000017","Controls":{"Control":{"ControlType":"TextBox","Name":"VIN","Value":""}},"Title":"车架号"},{"ButtonText1":"设置","ButtonText2":"查询","Content1":"pramwt\u003d1000010A#[车型]","Content2":"pramrd\u003d1000010A","Controls":{"Control":{"ControlType":"ComboBox","Data":"0:无车型,1:松正混动,2:绿控混动,3:安凯纯电动,4:安凯自主混动,5:松正4代混动,6:沃特玛纯电,7:长春-亚星纯电,8:伊顿,9:氢燃料","Name":"车型","Value":"0"}},"Title":"新能源车型"},{"ButtonText1":"查询","Content1":"*203#","Controls":{"Control":{"ControlType":"TextBox","Name":"","Value":"查询APN、ACC、电话卡状态、网络注册情况"}},"Title":"通讯状态"}],"IsMultiCheck":"True","NumberPerPage":"10"},"configSections":{"section":{"name":"DynamicControl","type":"WisdomDetectionTool.DynamicControl.Models.DynamicControlModel, WisdomDetectionTool"}}}';
+//
+//
+//			var termConfig=JSON.parse(jsonstr);
+//			controlGroups=termConfig.DynamicControl.ControlGroups;			
+//			numPerPage=termConfig.DynamicControl.NumberPerPage;
+
+
+//			alert('2');
+            var len = controlGroups.length;
+            if (len % numPerPage == 0) {
+                numpags = parseInt(len / numPerPage);
+            } else {
+                numpags = parseInt(len / numPerPage) + 1;
+            }
+            jQuery("#div_page").text(((1)+"/"+(numpags)));
+//			alert(''+len);
+//			var table=document.body.querySelector('#pppp');
+            load1Page()
+//			for(var i=0;i<len&&i<numPerPage;i++){
+//				var controlgroup=controlGroups[i];
+//				var row=document.createElement('div');
+//				var id="t"+i;
+//				row.className='rowS';
+//				row.id=id;
+//				var controls=controlgroup.Controls;
+//				var control =controls.Control;
+//				
+//				if(control.ControlType=='TextBox'){
+//					row.innerHTML='<a  class="name" onclick="hhhh(this)">'+controlgroup.Title+'</a><a class="second" onclick="inputclick(this)"><input  type="text" placeholder="'+control.Value+'" style="border: none;height: 20px;width:160px;margin-bottom: 2px;padding-bottom: 2px;padding-top: 0;" oninput="inputChange(this)"  onfocus="gogo(this);"/></a>';
+//					jQuery('ul').append(row);
+//				}else{
+//					row.innerHTML='<a  class="name" onclick="hhhh(this)">'+controlgroup.Title+'</a><a class="second"><select onchange="selectChange(this)" style="padding-bottom: 0;padding-top:0px;height: 20px;width:160px;padding-right: 15px; background: url(images/gaoji.png) no-repeat;background-position: 100% center;background-size: 10px 10px;"></select></a> ';	
+//					
+//					jQuery('ul').append(row);
+//					var datas=control.Data;
+//					var adatas=datas.split(',');
+//					for(var j=0;j<adatas.length;j++){
+//						var ops=adatas[j].split(':');
+//						var option='<option value="'+ops[0]+'">'+ops[1]+'</option>';
+//						jQuery('#'+id+' select').append(option);
+//					}
+//				}
+//				
+//				if(controlgroup.Checked=="True"){//checked 一定有value
+//					var rowa=jQuery('#'+id).children('a');
+//					if (control.ControlType=='TextBox') {
+//						var rowinputs=rowa[1].children;
+//						rowinputs[0].text=control.Value;
+//					} else{//颜色的配置与配置文件不一致，无checked这一项
+//						var rowselects=rowa[1].children;
+//						rowselects[0].value=control.Value;
+//					}
+//					hhhh(rowa[0]);
+//				}else{//未checked
+//					var rowa=jQuery('#'+id).children('a');
+//					if (control.ControlType=='ComboBox') {
+//						
+//						var rowselects=rowa[1].children;
+//						rowselects[0].value=control.Value;
+//					}else{//textBox
+//						var rowinputs=rowa[1].children;
+//						rowinputs[0].placeholder=control.Value;
+//					}
+//				}
+//			}
+        }
+
+    </script>
+</head>
+<div id="content"></div>
+<body style="background-color: #eeeeee;overflow: hidden">
+<div class="nav_bar2" style="height: 52px">
+    <!--<div class="nav_bar3">-->
+        <!--<p class="header-title">参数设置</p>-->
+    <!--</div>-->
+    <div class="title2">
+        <button  id="btn_bote" onclick="onBtnBoteClick()">设置波特率</button>
+        <!--<p>波特率</p>-->
+        <!--<select onchange="baudSelectChange(this)" title="115200">-->
+            <!--<option>115200</option>-->
+            <!--<option>9600</option>-->
+        <!--</select>-->
+        <!--&lt;!&ndash;<p>检验</p>&ndash;&gt;-->
+        <!--<select onchange="baudSelectChangeParity(this)" title="none">-->
+            <!--<option>none</option>-->
+            <!--<option>odd</option>-->
+            <!--<option>even</option>-->
+        <!--</select>-->
+    </div>
+
+
+</div>
+
+<div id="main">
+    <button id="fullselect" class="topBtns" onclick="selectAll()">
+    </button>
+    <button id="reset" class="topBtnr" onclick="resetTerminal()">
+    </button>
+    <button class="btnNormol" id="socket" onclick="btnSocketClick(this)">
+    </button>
+
+</div>
+
+<div id="bottombox">
+<ul id="pppp" class="list_body" style="background-color: #eeeeee;z-index: 1">
+
+    <!--<div class="rowSs" id="t0" onclick="inputclick(this)">-->
+        <!--<a class="name" onclick="hhhh(this)">新能源主</a>-->
+        <!--<a class="second" onclick="inputclick(this)"><input type="text" disabled="true"-->
+                                                            <!--placeholder="192.168.2.1"-->
+                                                            <!--style="border: none;height: 20px; width:160px;margin-bottom: 2px;padding-bottom: 2px;padding-top: 0;"-->
+                                                            <!--oninput="inputChange(this)"-->
+                                                            <!--onfocus="gogo(this);"/></a>-->
+    <!--</div>-->
+    <!--<div class="rowSs" id="t1" onclick="inputclick(this)">-->
+        <!--<a class="name" onclick="hhhh(this)">颜色</a>-->
+        <!--<a class="second">-->
+            <!--<select onchange="selectChange(this)" style="padding-bottom: 0;padding-top:0px;height: 20px;width:160px;-->
+  			 <!--background: url(images/gaoji.png) no-repeat right;-->
+  	<!--background-size: 10px 10px;  	">-->
+                <!--<option value="0">黄</option>-->
+                <!--<option value="1">蓝</option>-->
+            <!--</select>-->
+        <!--</a>-->
+    <!--</div>-->
+</ul>
+
+    <div class="page" style="margin-left: 10%" onclick="goFirstPage()">首页</div>
+    <div class="page" style="margin-left: 9%;margin-bottom: 3%" onclick="left2Right()">上一页</div>
+    <div class="page" style="margin-left: 4%" id="div_page">1/3</div>
+    <div class="page" style="margin-left: 3%" onclick="right2Left()">下一页</div>
+    <div class="page" style="margin-left: 10%;margin-bottom: 3%" onclick="goLastpage()">尾页</div>
+
+    <button class="bottomBtn"  id="writbtn" onclick="writting()"></button>
+    <button class="bottomBtn" id="querybtn" style="left: 15%" onclick="querying()"></button>
+</div>
+<script>
+
+    function setBtnSocketText(text) {
+        if (1 == text) {
+            jQuery("#socket").attr("class", "btnSocket")
+        } else {
+            jQuery("#socket").attr("class", "btnNormol")
+        }
+    }
+
+    function setisRWdataFalse() {
+        isRWdata = false;
+    }
+
+    function onBtnBoteClick() {
+        window.android.onBtnBoteClick();
+    }
+
+    function btnSocketClick(option) {
+//        alert("点击");
+        if (option.className == 'btnSocket') {//checked
+            android.btnSocketClick(1);
+        } else {
+            android.btnSocketClick(2);
+        }
+
+    }
+
+//    resetBtnBote();
+    function resetBtnBote() {
+        jQuery("#btn_bote").css("background-color", "gray");
+        jQuery('#btn_bote').attr("disabled","disabled");
+        jQuery('#btn_bote').on("onclick", null);
+    }
+
+    function resetTerminal() {
+//		right2Left();
+        var issure = window.confirm('确定要复位吗？');
+        if (issure) {
+            window.android.write('reset');
+        }
+
+    }
+
+    //选择所有，清除所有
+    function selectAll() {
+        var fs = jQuery('#fullselect');
+        if (fs[0].className == 'topBtns') {//当前状态未全选----全选
+            fs.removeClass('topBtns').addClass('topBtns2');
+            allselect.splice(0, allselect.length);
+            var initial = currentPageIndex * numPerPage;
+            for (var i = initial; i < controlGroups.length && i < (initial + numPerPage); i++) {
+                var id0 = "t" + i;
+                var second = getsecondElemt(id0);
+                var inputval;//把相应数据存储到allselect
+                if (getcontrolType(controlGroups[i]) == 'TextBox') {
+                    var inputval0 = jQuery(second);
+                    var inputval1 = inputval0[0].children;
+                    inputval = inputval1[0].text;
+                    if (inputval == "" || !inputval) {//无输入
+                        inputval = inputval1[0].placeholder;
+                    }
+                } else {//combobox
+                    var inputval0 = jQuery(second);
+                    var inputval1 = inputval0[0].children;
+                    inputval = inputval1[0].value;
+                }
+//	    	    		var inputval=input.val();
+
+                var jsonstr = '{"id":"' + id0 + '","val":"' + inputval + '"}';
+                var jsonobj = new Object();
+                jsonobj.id = id0;
+                jsonobj.val = inputval;
+
+                allselect.push(jsonobj);
+                //前面的checkbox更换状态
+                var first = getfirstElemt(id0);
+                var fa = jQuery(first);
+                var row = jQuery('#' + id0);
+
+                var firstCName;
+                if (fa[0].className == 'name') {
+                    firstCName = 'name';
+                } else {
+                    firstCName = 'name2';
+                }
+                fa.removeClass(firstCName).addClass('name2');
+                row[0].className = 'rowS';
+            }
+
+        } else {//当前状态全选----非全选
+            fs.removeClass('topBtns2').addClass('topBtns');//换button selectall状态
+
+            //改变checkbox状态
+            var initial = currentPageIndex * numPerPage;
+            for (var i = 0; i < allselect.length; i++) {
+                var id0 = allselect[i].id;
+                var first = getfirstElemt(id0);
+                var fa = jQuery(first);
+                var row = jQuery('#' + id0);
+                var firstCName;
+                if (fa[0].className == 'name2') {
+                    firstCName = 'name2';
+                } else {
+                    firstCName = 'name';
+                }
+
+
+                fa.removeClass(firstCName).addClass('name');
+                row[0].className = 'rowS';
+            }
+            //清空allselect
+            allselect.splice(0, allselect.length);
+        }
+    }
+
+
+    //写入
+    function writting() {
+        if (isRWdata) {
+            alert('请稍后，正在读写数据');
+            return;
+        }
+        var orders = new Array();
+        if (!allselectW) {
+            allselectW = new Array();
+        } else {
+            allselectW.splice(0, allselectW.length);
+        }
+        //清空读写状态
+        clearAllRWstate();
+        ///////////
+
+        for (var i = 0; i < allselect.length; i++) {
+            var id0 = allselect[i].id;
+            var value0 = allselect[i].val;
+            var indexstr = id0.substr(1, id0.length - 1);
+            var index = parseInt(indexstr);
+            var controlgroup = controlGroups[index];
+
+            if (controlgroup.ButtonText1 == '设置') {
+                var order = controlgroup.Content1;
+                var name = '[' + controlgroup.Controls.Control.Name + ']';
+                var order0 = order.replace(name, value0);
+                orders.push(order0);
+                allselectW.push(allselect[i]);
+            }
+        }
+        if (allselectW.length <= 0) {
+            alert('无数据可写入');
+            return;
+        }
+//		var orderstr=orders.toString();
+        var orderstr = orders.join(';,;');
+        isRWdata = true;
+//        alert('orderstr:' + orderstr + 'allselectW.len:' + allselectW.length);
+//		sendWriteData('0,1,0,0,1');
+
+//		alert('orderstr:'+orderstr+'allselectW.len:'+allselectW.length);		
+        window.android.write(orderstr);
+
+    }
+
+    //查询
+    function querying() {
+        if (isRWdata) {
+            alert('请稍后，正在读写数据');
+            return;
+        }
+        if (!allselectQ) {
+            allselectQ = new Array();
+        } else {
+            allselectQ.splice(0, allselectQ.length);
+        }
+        //清空读写状态
+        clearAllRWstate();
+        ///////////
+        var orders = new Array();
+        for (var i = 0; i < allselect.length; i++) {
+            var id0 = allselect[i].id;
+            var indexstr = id0.substr(1, id0.length - 1);
+            var index = parseInt(indexstr);
+            var controlgroup = controlGroups[index];
+
+            if (controlgroup.ButtonText1 == '查询') {
+                var order = controlgroup.Content1;
+                orders.push(order);
+                allselectQ.push(allselect[i]);
+            } else if (controlgroup.ButtonText2 == '查询') {
+                var order = controlgroup.Content2;
+                orders.push(order);
+                allselectQ.push(allselect[i]);
+            }
+        }
+
+        if (allselectQ.length <= 0) {
+            alert("无数据可查询");
+            return;
+        }
+//		var orderstr=orders.toString();
+
+        var orderstr = orders.join(';,;');
+//        alert('orderstr:' + orderstr + ',allselectQLEN:' + allselectQ.length);
+        isRWdata = true;
+//		sendQueryData('null;,;1;,;l');
+        window.android.query(orderstr);
+    }
+
+
+    //接收写入操作的返回数据
+    function sendWriteData(data) {
+//		data ='123;,;3;,;0;,;1;,;null;,;0;,;1';
+        isRWdata = false;
+        var datas = data.split(';,;');
+//        alert('终端返回data：' + data + ';len:' + datas.length + ';allselectW.length:' + allselectW.length);
+        var nullNumb = 0;
+        if (datas.length != allselectW.length) {
+            alert('写入错误，重写');
+            return;
+        }
+
+        for (var i = 0; i < allselectW.length; i++) {
+            var id0 = allselectW[i].id;//通过ID找到对应的配置数据
+            var indexstr = id0.substr(1, id0.length - 1);
+            var index = parseInt(indexstr);
+            var controlgroup = controlGroups[index];
+            var first = getfirstElemt(id0);
+            var fa = jQuery('#' + id0);
+            if (datas[i] == 'null') {//写入失败
+//	    	    fa.removeClass('name2').addClass('name4');
+                fa.removeClass('rowS').addClass('rowSf');
+                nullNumb++;
+            } else {//写入成功
+//	    	    fa.removeClass('name2').addClass('name3');
+                fa.removeClass('rowS').addClass('rowSs');
+//	    	    if(datas[i]=='null'){
+//	    	    	nullNumb++;
+//	    	    }
+            }
+        }
+        if (nullNumb == allselectW.length) {
+            alert('未写入数据，请重接USB，或确保配置文件正确');
+        }
+
+
+    }
+
+    //发送查询操作的返回数据
+    function sendQueryData(data) {
+        isRWdata = false;
+//		data ='123;,;null;,;0;,;1;,;null;,;0;,;1;,;null;,;0;,;1';
+        var datas = data.split(';,;');
+//        alert('终端返回data：' + data + ';len:' + datas.length + ';allselectQ.length:' + allselectQ.length);
+        var nullNumb = 0;
+        if (datas.length != allselectQ.length) {
+            alert('写入错误，重写');
+            return;
+        }
+        //之前查询到的数据清空
+        queryDatas.splice(0, queryDatas.length);
+
+        for (var i = 0; i < allselectQ.length; i++) {
+            var id0 = allselectQ[i].id;
+            var indexstr = id0.substr(1, id0.length - 1);
+            var index = parseInt(indexstr);
+            var controlgroup = controlGroups[index];
+            var second = getsecondElemt(id0);
+            var inputval;
+            //把相应数据存储到allselect
+            if (getcontrolType(controlGroups[index]) == 'TextBox') {
+                var inputval0 = jQuery(second);
+                var inputval1 = inputval0[0].children;
+                if (datas[i] == '') {//查询失败
+                    var first = getfirstElemt(id0);
+                    var fa = jQuery('#' + id0);
+                    fa.removeClass('rowS').addClass('rowSf');
+                    $(inputval1[0]).attr("value","");//清空内容
+                    nullNumb++;
+                } else {//查询成功
+                    var first = getfirstElemt(id0);
+                    var fa = jQuery('#' + id0);
+                    fa.removeClass('rowS').addClass('rowSs');
+                    var data = datas[i];
+                    inputval = datas[i];
+                    if (data.length > 15) {
+                        data = datas[i].substr(0, 15) + '...';
+                        inputval = 'null';
+                    }
+//	    	    	inputval1[0].val=data[i];//保存的全数据
+//                    inputval1[0].placeholder = data;//显示的部分数据
+//                    jQuery(inputval1[0]).val;//显示的部分数据
+                    //保存在allselect的数据也要相应变化
+                    $(inputval1[0]).attr("value",data);//清空内容
+                    var jsonstr = '{"id":"' + id0 + '","val":"' + inputval + '"}';
+                    var jsonobj = new Object();
+                    jsonobj.id = id0;
+                    jsonobj.val = inputval;
+                    for (var j = 0; j < allselect.length; j++) {//删除allselect中id=id0的项
+                        if (id0 == allselect[j].id) {
+                            allselect.splice(j, 1);
+                            break;
+                        }
+                    }
+                    allselect.push(jsonobj);
+                    //查询到的数据保存到 queryDatas
+                    var jsonobj2 = new Object();
+                    jsonobj2.id = id0;
+                    jsonobj2.val = datas[i];
+//	    	    	var jsonstr2='{"id":"'+id0+'","val":"'+datas[i]+'"}';
+//	    	        var jsonobj2=JSON.parse(jsonstr);
+                    queryDatas.push(jsonobj2);
+
+
+                }
+            } else {//combobox类型
+                var inputval0 = jQuery(second);
+                var inputval1 = inputval0[0].children;
+                if (datas[i] == 'null') {//查询失败
+                    var first = getfirstElemt(id0);
+                    var fa = jQuery('#' + id0);
+                    fa.removeClass('rowS').addClass('rowSf');
+                    nullNumb++;
+                } else {//查询成功
+                    var first = getfirstElemt(id0);
+                    var fa = jQuery('#' + id0);
+                    fa.removeClass('rowS').addClass('rowSs');
+                    inputval1[0].value = datas[i];
+                    //查询到的数据保存到 queryDatas
+                    var jsonobj2 = new Object();
+                    jsonobj2.id = id0;
+                    jsonobj2.val = datas[i];
+//	    	    	var jsonstr2='{"id":"'+id0+'","val":"'+datas[i]+'"}';
+//	    	        var jsonobj2=JSON.parse(jsonstr);
+                    queryDatas.push(jsonobj2);
+                }
+
+            }
+
+        }
+        if (nullNumb == allselectQ.length) {
+            alert('未写入数据，请重接USB，或确保配置文件正确');
+        }
+
+
+    }
+
+    //<input>双击事件
+    function inputDblClick(ele) {
+        var inputtext = ele.text;
+//		ele.text='123456';
+
+        alert(inputtext);
+    }
+
+    //根据颜色获取value
+
+    function gogo(op) {
+        op.parentElement.parentElement.scrollIntoView();
+
+    }
+
+    //获取控件类型 TEXTBOX  COMBOBOX
+    function getcontrolType(controlgroup) {
+        var controls = controlgroup.Controls;
+        var control = controls.Control;
+
+        return control.ControlType;
+    }
+
+    //通过row id，获取第一个 <a>
+    function getfirstElemt(id0) {
+        var childs = jQuery('#' + id0);
+        var child = childs[0].children;
+        var first = child[0];
+        return first;
+    }
+
+    //通过row id，获取第二个 <a>
+    function getsecondElemt(id0) {
+        var childs = jQuery('#' + id0);
+        var child = childs[0].children;
+        var second = child[1];
+        return second;
+    }
+
+    //输入框发生改变
+    function inputChange(sg) {
+        if (jQuery(sg).val() == '') {
+//	    	jQuery(sg).parent().prev().removeClass('name2').addClass('name')
+            var firstBlock = jQuery(sg).parent().prev();
+            var row = firstBlock.parent();
+            var id0 = row[0].id;
+            firstBlock[0].className = 'name';
+            row[0].className = 'rowS';
+
+
+            for (var i = 0; i < allselect.length; i++) {
+//	    	    var prev0=jQuery(sg).parent().prev();
+//	    	    var id0=prev0[0].id;
+                if (id0 == allselect[i].id) {
+                    allselect.splice(i, 1);
+                    break;
+                }
+            }
+        } else {
+//	    jQuery(sg).parent().prev().removeClass('name').addClass('name2');	
+            var firstBlock = jQuery(sg).parent().prev();
+            var row = firstBlock.parent();
+            var id0 = row[0].id;
+            firstBlock[0].className = 'name2';
+            row[0].className = 'rowS';
+            var inputval = jQuery(sg).val();
+
+            var jsonstr = '{"id":"' + id0 + '","val":"' + inputval + '"}';
+            var jsonobj = new Object();
+            jsonobj.id = id0;
+            jsonobj.val = inputval;
+            for (var i = 0; i < allselect.length; i++) {
+                if (id0 == allselect[i].id) {
+                    allselect.splice(i, 1);
+                    break;
+                }
+            }
+            allselect.push(jsonobj);
+        }
+    }
+
+    //选择器发生改变
+    function selectChange(sg) {
+
+//	    jQuery(sg).parent().prev().removeClass('name').addClass('name2'); 
+        var firstBlock = jQuery(sg).parent().prev();
+        var row = firstBlock.parent();
+        var id0 = row[0].id;
+        firstBlock[0].className = 'name2';
+        row[0].className = 'rowS';
+        var inputval = jQuery(sg).val();
+        var jsonstr = '{"id":"' + id0 + '","val":"' + inputval + '"}';
+        var jsonobj = new Object();
+        jsonobj.id = id0;
+        jsonobj.val = inputval;
+        for (var i = 0; i < allselect.length; i++) {
+            if (id0 == allselect[i].id) {
+                allselect.splice(i, 1);
+                break;
+            }
+        }
+        allselect.push(jsonobj);
+
+    }
+
+    //波特率选择权发生改变
+    function baudSelectChange(sg) {
+        var bard = sg.value;
+        window.android.openConnect(bard);
+    }
+
+    var parityOdd = 1;
+    var parityEven = 2;
+
+    //波特率选择权发生改变
+    function baudSelectChangeParity(sg) {
+        var bard = sg.value;
+        if (bard == "奇") {
+            window.android.openConnectParity(parityOdd);
+        }else if (bard == "偶") {
+            window.android.openConnectParity(parityEven);
+        }else {
+            window.android.openConnectParity(0);
+        }
+    }
+
+    //点击checkbox响应事件
+    function hhhh(option) {
+        var parent0 = jQuery(option).parent();
+        var id0 = parent0[0].id;
+        if (!isselect(id0)) {//未check
+            option.className = 'name2';
+            parent0[0].className = 'rowS';
+//	    	var parent0=jQuery(option).parent();
+//	    	var id0=parent0[0].id;
+
+            var next0 = jQuery(option).next();
+            var child = next0[0].children;
+            var child0 = child[0];
+            var childa0 = jQuery(child0);
+            var selectval = childa0.val();
+//	    	var l='{"id":"T1","val":"1"}';
+//	    	var lo=JSON.parse(l);
+            if (selectval == "" || !selectval) {
+                selectval = childa0[0].placeholder;
+            }
+            var jsonstr = '{"id":"' + id0 + '","val":"' + selectval + '"}';
+            var jsonobj = new Object();
+            jsonobj.id = id0;
+            jsonobj.val = selectval;
+            allselect.push(jsonobj);
+//			add2allselect(option);
+
+
+        } else {
+            option.className = 'name';
+            parent0[0].className = 'rowS';
+            for (var i = 0; i < allselect.length; i++) {
+                var parent0 = jQuery(option).parent();
+                var id0 = parent0[0].id;
+                if (id0 == allselect[i].id) {
+                    allselect.splice(i, 1);
+                    break;
+                }
+            }
+//			remove2allselect(option);
+        }
+
+        inputclick(option);
+    }
+
+    //根据ID判断某一项是否被选中
+    function isselect(id) {
+        for (var i = 0; i < allselect.length; i++) {
+            if (id == allselect[i].id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // 点击check按钮时，添加相应参数到allselect
+    function add2allselect(option) {//未使用
+        var parent0 = jQuery(option).parent();
+        var id0 = parent0[0].id;
+
+        var next0 = jQuery(option).next();
+        var child = next0[0].children;
+        var child0 = child[0];
+        var selectval = jQuery(child0).val();
+//	    var l='{"id":"T1","val":"1"}';
+//	    var lo=JSON.parse(l);
+        if (selectval == "" || !selectval) {
+            selectval = "null";
+        }
+        var jsonstr = '{"id":"' + id0 + '","val":"' + selectval + '"}';
+        var jsonobj = new Object();
+        jsonobj.id = id0;
+        jsonobj.val = selectval;
+        allselect.push(jsonobj);
+    }
+
+    //再次点击check按钮时，删除相应数据到allselect
+    function remove2allselect(option) {//未使用
+        for (var i = 0; i < allselect.length; i++) {
+            var parent0 = jQuery(option).parent();
+            var id0 = parent0[0].id;
+            if (id0 == allselect[i].id) {
+                allselect.remove(i);
+                break;
+            }
+        }
+    }
+
+    //左右滑动事件
+    $("#pppp").on("touchstart", function (e) {
+
+//　　　　e.preventDefault();
+        startX = e.originalEvent.changedTouches[0].pageX,
+            startY = e.originalEvent.changedTouches[0].pageY;
+    });
+    $("#pppp").on("touchmove", function (e) {
+//　　　　e.preventDefault();
+        moveEndX = e.originalEvent.changedTouches[0].pageX,
+            moveEndY = e.originalEvent.changedTouches[0].pageY,
+            X = moveEndX - startX,
+            Y = moveEndY - startY;
+
+        if (Math.abs(X) > Math.abs(Y) && X > 10) {
+//　　　　　　alert("left 2 right");
+            left2Right();
+
+        }
+        else if (Math.abs(X) > Math.abs(Y) && X < -10) {
+//　　　　　　alert("right 2 left");
+            right2Left();
+        }
+//　　　　else if ( Math.abs(Y) > Math.abs(X) && Y > 0) {
+//　　　　　　alert("top 2 bottom");
+//　　　　}
+//　　　　else if ( Math.abs(Y) > Math.abs(X) && Y < 0 ) {
+//　　　　　　alert("bottom 2 top");
+//　　　　}
+//　　　　else{
+//　　　　　　alert("just touch");
+//　　　　}
+    });
+
+    //右滑事件，currentPageIndex -1
+    function left2Right() {
+        currentPageIndex--;
+        if (currentPageIndex < 0) {
+            currentPageIndex = 0;
+//            alert('当前已是最小页');
+            return;
+        }
+        //之前查询到的数据清空
+        queryDatas.splice(0, queryDatas.length);
+        load1Page();
+        changPageIndex(currentPageIndex);
+    }
+
+    //左滑事件，currentPageIndex+1;
+    function right2Left() {
+        currentPageIndex++;
+//		var numPage=controlGroups.length/numPerPage;
+        if (currentPageIndex > (numpags - 1)) {
+            currentPageIndex = numpags - 1;
+//            alert('当前已是最大页');
+            return;
+        }
+        //之前查询到的数据清空
+        queryDatas.splice(0, queryDatas.length);
+        load1Page();
+        changPageIndex(currentPageIndex);
+    }
+
+    function goLastpage() {
+        currentPageIndex = numpags - 2;
+        right2Left();
+    }
+    function goFirstPage() {
+        currentPageIndex = 1;
+        left2Right();
+    }
+//    changPageIndex(2)
+    function changPageIndex(index) {
+        jQuery("#div_page").text(((index +1)+"/"+(numpags)));
+    }
+
+    //a .second点击事件,弹出查询到的值
+    function inputclick(gs) {
+//		var inputf=jQuery(gs).children('input')
+//		var inputtext=inputf[0].text;
+//		alert(inputtext);
+//		var rows=jQuery(gs).parent();
+//		var id0=rows[0].id;
+
+//		alert('here!');
+        var id0 = gs.id;
+        for (var i = 0; i < queryDatas.length; i++) {
+            if (id0 == queryDatas[i].id) {
+                data = queryDatas[i].val;
+                alert(data);
+                break;
+            }
+        }
+
+    }
+
+    function load1Page() {
+        var initial = numPerPage * currentPageIndex;
+        var len = controlGroups.length;
+//		var numPerPageLimit=numPerPage*(currentPageIndex+1);
+        //先清除allselect保存的值
+        if (!allselect) {
+            allselect = new Array();
+        } else {
+            allselect.splice(0, allselect.length);
+        }
+        //全选转为默认未选中状态
+        var fs = jQuery('#fullselect');
+        if (fs[0].className == 'topBtns2') {
+            fs.removeClass('topBtns2').addClass('topBtns');
+        }
+        //queryalldata清空，在sendquerydata已经清空了
+
+        //ul清空
+        var ul = jQuery('ul');
+        ul[0].innerHTML = '';
+//		jQuery('ul').innerHTML='';
+        var limit = parseInt(initial) + parseInt(numPerPage);
+        console.log(limit);
+        for (var i = initial; (i < limit )&& (i < len ); i++) {
+//        for (var i = initial; i < (10) && i < len ; i++) {
+            console.log(i + "xx" +(initial + numPerPage));
+            var controlgroup = controlGroups[i];
+            var row = document.createElement('div');
+//				var row=new Object();
+
+            var id = "t" + i;
+
+            row.className = 'rowS';
+            row.id = id;
+//				row.attachEvent('onclick',inputclick());
+//				row.outerHTML='<div class="rowS"   id="'+id+'" onclick="inputclick(this)"></div>';
+
+            var controls = controlgroup.Controls;
+            var control = controls.Control;
+
+            if (control.ControlType == 'TextBox') {
+                var enable = control.Enable;
+                var idisable;
+                if (enable == 'False') {
+                    idisable = 'true';
+                    row.innerHTML = '<a id="' + id + '" class="name" onclick="hhhh(this)">' + controlgroup.Title + '</a><a class="second" ><input  type="text" disabled="' + idisable + '"  placeholder="' + control.Value + '" style="border: none;height: 20px;width:160px;margin-bottom: 2px;padding-bottom: 2px;padding-top: 0;" oninput="inputChange(this)"  onfocus="gogo(this);"/></a>';
+
+                } else {
+                    idisable == 'false';
+                    row.innerHTML = '<a id="' + id + '" class="name" onclick="hhhh(this)">' + controlgroup.Title + '</a><a class="second" ><input  type="text"  placeholder="' + control.Value + '" style="border: none;height: 20px;width:160px;margin-bottom: 2px;padding-bottom: 2px;padding-top: 0;" oninput="inputChange(this)"  onfocus="gogo(this);"/></a>';
+
+                }
+
+                jQuery('ul').append(row);
+            } else {
+                row.innerHTML = '<a id="' + id + '" class="name" onclick="hhhh(this)">' + controlgroup.Title + '</a><a class="second"><select onchange="selectChange(this)" style="padding-bottom: 0;padding-top:0px;height: 20px;width:160px;background: url(images/gaoji.png) no-repeat right;background-size: 10px 10px"></select></a> ';
+
+                jQuery('ul').append(row);
+                var datas = control.Data;
+                var adatas = datas.split(',');
+                for (var j = 0; j < adatas.length; j++) {
+                    var ops = adatas[j].split(':');
+                    var option = '<option value="' + ops[0] + '">' + ops[1] + '</option>';
+                    jQuery('#' + id + ' select').append(option);
+                }
+            }
+
+            var outerh = row.outerHTML;
+            var reg = new RegExp(/<div.*?>/);
+//            var outerh1 = outerh.replace(reg, '<div class="rowS"   id="' + id + '" onclick="inputclick(this)" >');
+            var outerh1 = outerh.replace(reg, '<div class="rowS"   id="' + id + '"  >');
+            row.outerHTML = outerh1;
+
+            if (controlgroup.Checked == "True") {//checked 一定有value
+                var rowa = jQuery('#' + id).children('a');
+                if (control.ControlType == 'TextBox') {
+                    var rowinputs = rowa[1].children;
+                    rowinputs[0].text = control.Value;
+                } else {//颜色的配置与配置文件不一致，无checked这一项
+                    var rowselects = rowa[1].children;
+                    rowselects[0].value = control.Value;
+                }
+                hhhh(rowa[0]);
+            } else {//未checked
+                var rowa = jQuery('#' + id).children('a');
+                if (control.ControlType == 'ComboBox') {
+
+                    var rowselects = rowa[1].children;
+                    rowselects[0].value = control.Value;
+                } else {//textBox
+                    var rowinputs = rowa[1].children;
+                    rowinputs[0].placeholder = control.Value;
+                }
+            }
+        }
+    }
+
+    //清除所有的读写状态
+    function clearAllRWstate() {
+        var initial = numPerPage * currentPageIndex;
+        var len = controlGroups.length;
+//		var numPerPageLimit=numPerPage*(currentPageIndex+1);
+        //先清除allselect保存的值
+
+        for (var i = initial; i < len && i < (initial + numPerPage); i++) {
+            var id = "t" + i;
+            var row = jQuery('#' + id);
+            row[0].className = 'rowS';
+        }
+    }
+
+    //	$('ul').on('click','div',inputclick());
+
+</script>
+</body>
+
+</html>

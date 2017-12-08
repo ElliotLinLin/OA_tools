@@ -1,0 +1,260 @@
+package com.hst.mininurse;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+import org.apache.http.util.EncodingUtils;
+
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.res.AssetManager;
+import android.os.Environment;
+import android.os.StatFs;
+import android.util.Log;
+
+/**
+ *
+ */
+public class FileUtil {
+	private static final long LOW_STORAGE_THRESHOLD = 1024 * 1024 * 15;
+	public static File getDiskCachePath(String uniqueName,Context context) {
+		final String cachePath = FileUtil.isExternalStorageMounted() ? FileUtil.getExternalCacheDir(context).getPath() : context.getCacheDir().getPath();
+		return new File(cachePath + File.separator + uniqueName);
+	}
+
+	/**
+	 * Get the external app cache directory.
+	 *
+	 * @return The external cache dir
+	 */
+
+	@SuppressLint("NewApi")
+	public static File getExternalCacheDir(Context context) {
+		final String cacheDir = "/Android/data/" + context.getPackageName() + "/cache/";
+		File file = new File(Environment.getExternalStorageDirectory().getPath() + cacheDir);
+		if (!file.exists())
+			file.mkdirs();
+		return file;
+	}
+
+	/*
+	 * 外部存储设备是否就绪
+	 */
+	public static boolean isExternalStorageMounted() {
+
+		if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)
+				|| !Environment.getExternalStorageDirectory().canWrite()) {
+			return false;
+		}
+		return true;
+	}
+
+	public static String getExternalStoragePath() {
+		// 获取SdCard状态
+		String state = Environment.getExternalStorageState();
+		// 判断SdCard是否存在并且是可用的
+		if (Environment.MEDIA_MOUNTED.equals(state)) {
+			if (Environment.getExternalStorageDirectory().canWrite()) {
+				return Environment.getExternalStorageDirectory().getPath();
+			}
+		}
+		return null;
+	}
+
+	public static boolean saveBytes2File(byte[] bytes, File f) {
+		try {
+			if (!f.exists()) {
+				f.mkdirs();
+				f.createNewFile();
+			}
+			FileOutputStream out = new FileOutputStream(f);
+			out.write(bytes);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public static boolean checkSdCardAvailable() {
+
+		String state = Environment.getExternalStorageState();
+		File sdCardDir = Environment.getExternalStorageDirectory();
+		if (Environment.MEDIA_MOUNTED.equals(state) && sdCardDir.canWrite()) {
+			if (getAvailableStore(sdCardDir.toString()) > LOW_STORAGE_THRESHOLD) {
+				try {
+					return true;
+				} catch (Exception e) {
+				}
+			}
+		}
+		return false;
+
+	}
+
+	/**
+	 * 获取存储卡的剩余容量，单位为字节
+	 *
+	 * @param filePath
+	 * @return availableSpare
+	 */
+
+	private static long getAvailableStore(String filePath) {
+		// 取得sdcard文件路径
+		StatFs statFs = new StatFs(filePath);
+		// 获取block的SIZE
+		long blocSize = statFs.getBlockSize();
+		// 获取BLOCK数量
+		long totalBlocks = statFs.getBlockCount();
+		// 可使用的Block的数量
+		long availaBlock = statFs.getAvailableBlocks();
+		long availableSpare = availaBlock * blocSize;
+		return availableSpare;
+
+	}
+
+	/**
+	 */
+	public static boolean isExist(String filename,Context context) {
+		File file = new File(context.getFilesDir().getPath() + "/" + filename);
+		return file.exists();
+	}
+
+	public static String getPicDir(Context context) {
+		return context.getFilesDir().getPath();
+	}
+
+	public static void copyFile(final Context context, final String filename) {
+		if (isExist(filename,context)) {
+			return;
+		}
+		new Thread() {
+			public void run() {
+
+				FileOutputStream fos = null;
+				InputStream is = null;
+				try {
+					fos = context.openFileOutput(filename, context.MODE_PRIVATE);
+					// 获取AssetManager
+					AssetManager am = context.getAssets();
+					is = am.open(filename);
+					// 流的读写数据
+					byte[] buffer = new byte[1024];
+					// 读取的字节数
+					int len = is.read(buffer);
+					int totalSize = 0;
+
+					while (len != -1) {
+						totalSize++;
+
+						fos.write(buffer, 0, len);// 防止最后一次读不满
+						if (totalSize % 10 == 0) {// 每读10次 刷新数据
+							fos.flush();// 写到文件
+						}
+						len = is.read(buffer);// 继续读取数据
+					}
+					// io流关闭
+
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				} finally {
+					if (is != null) {
+						try {
+							is.close();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+					if (fos != null) {
+						try {
+							fos.close();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			};
+		}.start();
+
+	}
+
+	/**文件保存目录初始化--这个目录在app安装目录下
+	 * @param context
+	 * @return
+	 */
+	public static boolean initFileFloder(Context context) {
+		File filesDir = context.getExternalFilesDir("hst");
+		File f = new File(filesDir + "/hstFile");
+		if (!f.exists()) {
+			f.mkdirs();
+		}
+		return f.exists();
+	}
+
+	/**获取文件保存目录--这个目录在app安装目录下
+	 * @return
+	 */
+	public static String getFileFloder(Context context) {
+		String path = context.getExternalFilesDir("hst").getAbsolutePath() +"";
+		return path;
+	}
+	//获取数据来源
+	public static String readSDFile(String fileName)throws IOException {    
+		  String res="";
+		        File file = new File(fileName);    
+		        FileInputStream fis = new FileInputStream(file);    
+		        int length = fis.available();   
+		         byte [] buffer = new byte[length];   
+		         fis.read(buffer);       
+		         res = EncodingUtils.getString(buffer, "GBK");   
+		         res=res.replaceAll("\n", ";");
+		         fis.close();       
+		         return res;    
+	}
+
+	public static void writeStr2File(String str,String path){
+//		try {
+//			File file = new File(path);
+//			if (!file.exists()) {
+//				File dir = new File(file.getParent());
+//				dir.mkdirs();
+//				file.createNewFile();
+//			}
+//			FileOutputStream outStream = new FileOutputStream(file);
+//			outStream.write(str.getBytes());
+//			outStream.close();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		try {
+			FileWriter fw = new FileWriter(path, true);
+			BufferedWriter bw = new BufferedWriter(fw);
+//			bw.append("在已有的基础上添加字符串");
+			bw.write(str+"\r\n ");// 往已有的文件上添加字符串
+			bw.close();
+			fw.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+	}
+
+	public static void write2Filelog(String str){
+		FileUtil.writeStr2File(str,Environment
+				.getExternalStorageDirectory().getAbsolutePath()
+				+ "/Hst_log.txt");
+
+	}
+	
+}

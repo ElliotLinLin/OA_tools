@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="D:\development\Mininurse3\mininurse\src\main\jniLibs"/></dataSet><dataSet config="Mininurse3"><source path="D:\development\Mininurse3\mininurse\src\Mininurse3\jniLibs"/></dataSet><dataSet config="debug"><source path="D:\development\Mininurse3\mininurse\src\debug\jniLibs"/></dataSet><dataSet config="Mininurse3Debug"><source path="D:\development\Mininurse3\mininurse\src\Mininurse3Debug\jniLibs"/></dataSet></merger>

@@ -1,0 +1,4 @@
+#Fri Dec 08 16:28:53 CST 2017
+base.0=D\:\\development\\Mininurse3\\mininurse\\build\\intermediates\\transforms\\dex\\Mininurse3\\debug\\folders\\1000\\1f\\main
+renamed.0=classes.dex
+file.0=D\:\\development\\Mininurse3\\mininurse\\build\\intermediates\\transforms\\dex\\Mininurse3\\debug\\folders\\1000\\1f\\main\\classes.dex

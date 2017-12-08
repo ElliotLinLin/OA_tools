@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="D:\development\Mininurse3\mininurse\libs\okhttputils-2_6_2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="0b58ea597d7d7a6ef0ec42ae3994985f7e86553f">
+        <dex dex="D:\development\Mininurse3\mininurse\build\intermediates\transforms\dex\Mininurse3\debug\folders\1000\2\okhttputils-2_6_2_77db7b5c52a97616e26b5b3ceb34d3e01ad0e196\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\development\Mininurse3\mininurse\libs\okio-1.13.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="a9283170b7305c8d92d25aff02a6ab7e45d06cbe">
+        <dex dex="D:\development\Mininurse3\mininurse\build\intermediates\transforms\dex\Mininurse3\debug\folders\1000\2\okio-1.13.0_fe8e12411932c57db90dba8afc3ac9bbd4daf366\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\development\Mininurse3\mininurse\build\intermediates\incremental-runtime-classes\Mininurse3\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c82741bc129dd5f99f11a4ab8666ae24262053b6">
+        <dex dex="D:\development\Mininurse3\mininurse\build\intermediates\transforms\dex\Mininurse3\debug\folders\1000\10000\instant-run_09ed65867ed34e6bc0bc7dd0a82fbc5cd6ba683d\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\development\Mininurse3\mininurse\build\intermediates\incremental-classes\Mininurse3\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="0676b37a0ca7d268f2dd8e8d3e952e08f07c07db">
+        <dex dex="D:\development\Mininurse3\mininurse\build\intermediates\transforms\dex\Mininurse3\debug\folders\1000\10000\instant-run-bootstrap_45bc36628bf82c6bef747fd6dd0e11f533715857\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\development\Mininurse3\mininurse\libs\gson-2.8.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="02a8e0aa38a2e21cb39e2f5a7d6704cbdc941da0">
+        <dex dex="D:\development\Mininurse3\mininurse\build\intermediates\transforms\dex\Mininurse3\debug\folders\1000\2\gson-2.8.1_c8cb18ccc7a356c122a258cb55bb15b1c8b781b7\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\development\Mininurse3\mininurse\libs\okhttp-3.8.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="4d060ca3190df0eda4dc13415532a12e15ca5f11">
+        <dex dex="D:\development\Mininurse3\mininurse\build\intermediates\transforms\dex\Mininurse3\debug\folders\1000\2\okhttp-3.8.1_fc71b3b01abe5acfe42e0b7c4f679e012fdc1aa5\classes.dex" />
+    </item>
+
+</items>

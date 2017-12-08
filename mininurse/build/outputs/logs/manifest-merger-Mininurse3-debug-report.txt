@@ -1,0 +1,148 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:2:1-97:12
+	package
+		ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:3:5-32
+		INJECTED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml
+		INJECTED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml
+	android:versionName
+		ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:5:5-32
+		INJECTED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml
+		INJECTED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml
+	android:versionCode
+		ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:4:5-28
+		INJECTED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml
+		INJECTED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:2:11-69
+uses-sdk
+ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:7:5-9:40
+MERGED from [com.android.support:multidex:1.0.1] D:\android\cache\0fda26dd1f62df6f263ec873dba9efc2decfdbe2\output\AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:appcompat-v7:25.3.1] D:\android\cache\558300882080151febca42403cea33c54116811f\output\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] D:\android\cache\9a22f2278e8a6c42b4934100d8393862f11f8b45\output\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:25.3.1] D:\android\cache\12f19ca46438fec8e5084feb7eba71da1aad7025\output\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:25.3.1] D:\android\cache\7572ec10b897963881b5a87a1e6270eab189d482\output\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-fragment:25.3.1] D:\android\cache\3d4faf9c242916b873062b00d480464a46c1d829\output\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-media-compat:25.3.1] D:\android\cache\0e2d4be0493216c3d6fac9b1868f14e633483e18\output\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-core-ui:25.3.1] D:\android\cache\9677797af2f033c24c18ce25adbf345e25a51fa9\output\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:25.3.1] D:\android\cache\0e08290a4f6ecdb1a50dfaf851f82ab153c0f9f1\output\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-compat:25.3.1] D:\android\cache\e35a27bf03a0bde75025efec01b0e82b1b3c97d3\output\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] D:\android\cache\3aa414fa5fa9e51451e8817ce5929aa29329df19\output\AndroidManifest.xml:5:5-7:41
+	tools:overrideLibrary
+		ADDED from [com.android.support:appcompat-v7:25.3.1] D:\android\cache\558300882080151febca42403cea33c54116811f\output\AndroidManifest.xml:23:9-75
+	android:targetSdkVersion
+		ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:9:9-38
+		INJECTED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml
+		INJECTED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:8:9-35
+		INJECTED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml
+		INJECTED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:11:5-75
+	android:name
+		ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:11:22-73
+uses-permission#android.permission.CHANGE_NETWORK_STATE
+ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:12:5-78
+	android:name
+		ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:12:22-76
+uses-permission#android.permission.CHANGE_WIFI_STATE
+ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:13:5-75
+	android:name
+		ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:13:22-73
+uses-permission#android.permission.INTERNET
+ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:14:5-66
+	android:name
+		ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:14:22-64
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:15:5-79
+	android:name
+		ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:15:22-77
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:16:5-80
+	android:name
+		ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:16:22-78
+uses-permission#android.permission.WRITE_SETTINGS
+ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:17:5-72
+	android:name
+		ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:17:22-70
+uses-permission#android.permission.READ_PHONE_STATE
+ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:18:5-74
+	android:name
+		ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:18:22-72
+uses-feature#android.hardware.usb.accessory
+ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:20:5-66
+	android:name
+		ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:20:19-64
+application
+ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:23:5-95:19
+MERGED from [com.android.support:appcompat-v7:25.3.1] D:\android\cache\558300882080151febca42403cea33c54116811f\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] D:\android\cache\9a22f2278e8a6c42b4934100d8393862f11f8b45\output\AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-vector-drawable:25.3.1] D:\android\cache\12f19ca46438fec8e5084feb7eba71da1aad7025\output\AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-v4:25.3.1] D:\android\cache\7572ec10b897963881b5a87a1e6270eab189d482\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-fragment:25.3.1] D:\android\cache\3d4faf9c242916b873062b00d480464a46c1d829\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-media-compat:25.3.1] D:\android\cache\0e2d4be0493216c3d6fac9b1868f14e633483e18\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-ui:25.3.1] D:\android\cache\9677797af2f033c24c18ce25adbf345e25a51fa9\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-utils:25.3.1] D:\android\cache\0e08290a4f6ecdb1a50dfaf851f82ab153c0f9f1\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-compat:25.3.1] D:\android\cache\e35a27bf03a0bde75025efec01b0e82b1b3c97d3\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] D:\android\cache\3aa414fa5fa9e51451e8817ce5929aa29329df19\output\AndroidManifest.xml:9:5-20
+	android:label
+		ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:27:9-41
+	android:allowBackup
+		ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:25:9-35
+	android:icon
+		ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:26:9-40
+	android:theme
+		ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:28:9-40
+	android:name
+		ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:24:9-42
+activity#com.hst.mininurse.ui.RegisterActivity
+ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:49:9-68:20
+	android:theme
+		ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:50:13-63
+	android:name
+		ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:49:19-54
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:63:13-67:29
+action#android.intent.action.MAIN
+ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:64:17-68
+	android:name
+		ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:64:25-66
+category#android.intent.category.LAUNCHER
+ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:66:17-76
+	android:name
+		ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:66:27-74
+activity#com.hst.mininurse.ui.MainActivity2
+ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:72:9-91:20
+	android:windowSoftInputMode
+		ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:73:13-55
+	android:theme
+		ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:74:13-63
+	android:name
+		ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:72:19-51
+intent-filter#android.hardware.usb.action.USB_ACCESSORY_ATTACHED
+ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:77:13-79:29
+action#android.hardware.usb.action.USB_ACCESSORY_ATTACHED
+ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:78:17-92
+	android:name
+		ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:78:25-90
+meta-data#android.hardware.usb.action.USB_ACCESSORY_ATTACHED
+ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:81:13-84:25
+	android:resource
+		ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:83:17-57
+	android:name
+		ADDED from D:\development\Mininurse3\mininurse\src\main\AndroidManifest.xml:82:17-82
+meta-data#android.support.VERSION
+ADDED from [com.android.support:appcompat-v7:25.3.1] D:\android\cache\558300882080151febca42403cea33c54116811f\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] D:\android\cache\9a22f2278e8a6c42b4934100d8393862f11f8b45\output\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:support-vector-drawable:25.3.1] D:\android\cache\12f19ca46438fec8e5084feb7eba71da1aad7025\output\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:support-v4:25.3.1] D:\android\cache\7572ec10b897963881b5a87a1e6270eab189d482\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-fragment:25.3.1] D:\android\cache\3d4faf9c242916b873062b00d480464a46c1d829\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-media-compat:25.3.1] D:\android\cache\0e2d4be0493216c3d6fac9b1868f14e633483e18\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-core-ui:25.3.1] D:\android\cache\9677797af2f033c24c18ce25adbf345e25a51fa9\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-core-utils:25.3.1] D:\android\cache\0e08290a4f6ecdb1a50dfaf851f82ab153c0f9f1\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-compat:25.3.1] D:\android\cache\e35a27bf03a0bde75025efec01b0e82b1b3c97d3\output\AndroidManifest.xml:25:5-27:34
+	android:value
+		ADDED from [com.android.support:appcompat-v7:25.3.1] D:\android\cache\558300882080151febca42403cea33c54116811f\output\AndroidManifest.xml:27:9-31
+	android:name
+		ADDED from [com.android.support:appcompat-v7:25.3.1] D:\android\cache\558300882080151febca42403cea33c54116811f\output\AndroidManifest.xml:26:9-47

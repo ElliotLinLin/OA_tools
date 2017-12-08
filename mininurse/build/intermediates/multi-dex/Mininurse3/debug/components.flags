@@ -1,0 +1,37 @@
+-injars 'D:\development\Mininurse3\mininurse\build\intermediates\transforms\jarMerging\Mininurse3\debug\jars\1\1f\combined.jar'
+-outjars 'D:\development\Mininurse3\mininurse\build\intermediates\multi-dex\Mininurse3\debug\componentClasses.jar'
+
+-libraryjars 'D:\ProgramData\Android\sdk\build-tools\25.0.2\lib\shrinkedAndroid.jar'
+
+-forceprocessing
+-dontoptimize
+-dontobfuscate
+-dontusemixedcaseclassnames
+-dontpreverify
+-dontnote **
+-dontwarn **
+-printconfiguration 'D:\development\Mininurse3\mininurse\build\intermediates\multi-dex\Mininurse3\debug\components.flags'
+
+
+-keep public class * extends android.app.Instrumentation {
+    <init>();
+}
+
+-keep public class * extends android.app.Application {
+    <init>();
+    void attachBaseContext(android.content.Context);
+}
+
+-keep public class * extends android.app.backup.BackupAgent {
+    <init>();
+}
+
+-keep public class * extends java.lang.annotation.Annotation {
+    <fields>;
+    <methods>;
+}
+
+-keep class com.android.tools.fd.** {
+    <fields>;
+    <methods>;
+}

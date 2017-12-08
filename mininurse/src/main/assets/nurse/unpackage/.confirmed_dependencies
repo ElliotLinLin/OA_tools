@@ -1,0 +1,56 @@
+{
+  "index.html": {
+    "resources": [
+      "css/index.css",
+      "js/mui.picker.js",
+      "js/mui.min.js",
+      "js/mui.poppicker.js",
+      "css/mui.min.css",
+      "css/mui.poppicker.css",
+      "css/mui.picker.css",
+      "css/header.css",
+      "debug.html",
+      "images/Ä-4.png",
+      "images/Ø§.png",
+      "js/jquery-2.1.4.min.js",
+      "images/É.png",
+      "images/¾n.png",
+      "images/åâ.png",
+      "images/§Á.png",
+      "images/Õ.png",
+      "setting.html",
+      "images/setting.png",
+      "js/fff.js",
+      "images/btn_write_in.png",
+      "images/top.png",
+      "images/query.png",
+      "images/btn_read.png",
+      "images/gaoji.png",
+      "images/version.png",
+      "images/xh1.png",
+      "images/debug.png",
+      "images/shouqi.png",
+      "images/version_last.png"
+    ],
+    "refer": [
+      "debug.html",
+      "setting.html",
+      "findOut.html"
+    ]
+  },
+  "debug.html": {
+    "resources": [
+      "images/minute_return.png",
+      "css/debug.css"
+    ]
+  },
+  "setting.html": {
+    "resources": [
+      "index.html",
+      "images/minute_return.png"
+    ],
+    "refer": [
+      "index.html"
+    ]
+  }
+}

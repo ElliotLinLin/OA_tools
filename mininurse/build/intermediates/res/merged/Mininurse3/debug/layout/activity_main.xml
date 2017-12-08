@@ -1,0 +1,49 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.hst.mininurse.MainActivity" >
+
+    <TextView
+        android:id="@+id/receive_text"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:hint="接受消息"
+        android:visibility="visible" />
+
+    <EditText
+        android:id="@+id/input"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:hint="输入数据"
+        android:visibility="visible" />
+
+    <Button
+        android:id="@+id/send"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="发送"
+        android:visibility="visible" />
+
+    <Button
+        android:visibility="visible"
+        android:id="@+id/open_service"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="开启服务"
+         />
+
+    <Button
+        android:id="@+id/close_service"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="关闭服务"
+        android:visibility="visible" />
+
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

@@ -1,0 +1,57 @@
+
+html,body{
+	height: 100%;margin: 0;padding: 0;
+}
+
+#main { 
+height:100%px; 
+/*padding-top:90px;*/ 
+text-align:center; 
+} 
+#fullbg { 
+background-color:black; 
+left:0; 
+opacity:0.6; 
+position:absolute; 
+top:0; 
+z-index:3; 
+filter:alpha(opacity=60); 
+-moz-opacity:0.6; 
+-khtml-opacity:0.6; 
+} 
+#dialog { 
+background-color:#fff; 
+border:5px solid rgba(0,0,0, 0.4); 
+border-radius:5px;
+  
+padding:1px; 
+position:fixed !important; /* 浮动对话框 */ 
+position:absolute; 
+top:calc((100% - 200px) / 2);
+left:calc((100% - 150px) / 2); 
+height:200px;
+width:150px; 
+z-index:5; 
+ 
+display:none; 
+} 
+#dialog div{
+	position: relative;
+	background-color: #42dfe5;
+	background-image: url(../images/success.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 35px 35px;
+	
+	height: 80%;
+	
+}
+
+#dialog button {
+	border:  none;
+	width: 70%;
+	height: 20%;
+	background: url(../images/close_1.png) no-repeat;
+	background-position: center;
+	background-size: contain;
+}

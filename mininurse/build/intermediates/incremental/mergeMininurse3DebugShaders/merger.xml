@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="D:\development\Mininurse3\mininurse\src\main\shaders"/></dataSet><dataSet config="Mininurse3"><source path="D:\development\Mininurse3\mininurse\src\Mininurse3\shaders"/></dataSet><dataSet config="debug"><source path="D:\development\Mininurse3\mininurse\src\debug\shaders"/></dataSet><dataSet config="Mininurse3Debug"><source path="D:\development\Mininurse3\mininurse\src\Mininurse3Debug\shaders"/></dataSet></merger>

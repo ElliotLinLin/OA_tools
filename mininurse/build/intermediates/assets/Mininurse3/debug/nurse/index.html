@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>1</title>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/mui.picker.css" />
+		<link rel="stylesheet" type="text/css" href="css/mui.poppicker.css" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" type="text/css" href="css/header.css" />
+
+	</head>
+
+	<body>
+		<div class="first_Bar">
+			<p class="header-title">小护士</p>
+			<button id="showRatePicker" class="versionChoose1" style="display: none;">波特率:</button>
+			<button id="showUserPicker" class="versionChoose">HST-AT<div class="versionChooseP"></div></button>
+		</div>
+
+		<!--<button style="position: absolute;top: 0;" onclick="javascript:if (jQuery(this).text() == '开启'){android.showDebug('0');jQuery(this).text('关闭')}else{android.showDebug('1');jQuery(this).text('开启')}  ">开启</button>-->
+
+		<ul id="list1" class="list_body">
+			<div class="rowS">
+				<a class="name">工具状态</a>
+				<a id="connect" class="second" onclick="closeServer();openServer();">未连接</a>
+			</div>
+			<div class="rowS">
+				<a class="name">系统时间</a>
+				<a id="U" class="second"></a>
+			</div>
+			<div class="rowS">
+				<a class="name">终端型号</a>
+				<a class="second">HST-S-TY-GG01</a>
+			</div>
+			<div class="rowS">
+				<a class="name">版本信息</a>
+				<a id="V" class="second"></a>
+			</div>
+			<div class="rowS">
+				<a class="name">通讯号</a>
+				<a id="T" class="second"></a>
+			</div>
+			<div class="rowS">
+				<a class="name">平台IP</a>
+				<a id="I" class="second"></a>
+			</div>
+			<div class="rowS">
+				<a class="name">平台端口</a>
+				<a id="E" class="second"></a>
+			</div>
+			<div class="rowS">
+				<a class="name">车牌号</a>
+				<a id="LC" class="second"></a>
+			</div>
+			<div class="rowS">
+				<a class="name">通讯状态</a>
+				<a id="M_7" class="second">离线</a>
+			</div>
+			<div class="rowS">
+				<a class="name">信号强度</a>
+				<a id="M_6" class="second" style="padding-right: 25px; background: url(images/xh1.png) no-repeat;background-position: right center;background-size: 18px 10px;">0</a>
+			</div>
+			<div class="rowS">
+				<a class="name">GPS状态</a>
+				<a id="M_2" class="second"></a>
+			</div>
+			<div class="rowS">
+				<a class="name">定位状态</a>
+				<a id="M_1" class="second"></a>
+			</div>
+			<button id="gaoji">高级</button>
+		</ul>
+
+		<ul id="list2" class="list_body_2">
+			<div class="rowS">
+				<a class="name">工作模式</a>
+				<a id="W" class="second">正常模式</a>
+			</div>
+			<div class="rowS">
+				<a class="name">汇报基准时间</a>
+				<a id="7" class="second"></a>
+			</div>
+			<div class="rowS">
+				<a class="name">汇报间隔</a>
+				<a id="R" class="second"></a>
+			</div>
+			<div class="rowS">
+				<a class="name">CCID</a>
+				<a id="D" class="second"></a>
+			</div>
+			<div class="rowS">
+				<a class="name">追车时长</a>
+				<a id="N" class="second"></a>
+			</div>
+			<div class="rowS">
+				<a class="name">电池信息</a>
+				<a id="B" class="second"></a>
+			</div>
+			<div class="rowS">
+				<a class="name">APN</a>
+				<a id="A" class="second"></a>
+			</div>
+			<div class="rowS">
+				<a class="name">基站服务器IP</a>
+				<a id="i" class="second"></a>
+			</div>
+			<div class="rowS">
+				<a class="name">基站服务器端口</a>
+				<a id="e" class="second"></a>
+			</div>
+			<div class="rowS">
+				<a class="name">基站服务器开启</a>
+				<a id="s" class="second"></a>
+			</div>
+			<div class="rowS">
+				<a class="name">每周作息时间</a>
+				<a id="S" class="second"></a>
+			</div>
+			<button id="shouqi">收起</button>
+		</ul>
+
+		<ul id="list3" class="list_body_3">
+			<!--<div class="controlRow">
+	  		<a class="mainTitle">主标题:</a>
+	  		<br />
+	  	    <div  class="midLine"></div> 
+	  	    <br />
+	  		<input type="text" class="controlInput" placeholder="指令" style="width: 40%;">
+	  		<button class="writeBtn" onclick="sendOrderOfWrite()"></button>
+	  		<button class="readBtn" onclick="sendOrderOfRead()"></button>
+       </div> -->
+
+		</ul>
+
+		<div class="bottomC">
+			<div class="bottomContent">
+				<button id="setting" class="setting">设置模式</button>
+			</div>
+			<div class="bottomContent">
+
+			</div>
+			<div class="bottomContent">
+				<button id="debug" class="debug">调试模式</button>
+			</div>
+		</div>
+		<button id="findOut" class="findOut"></button>
+
+		<script type="text/javascript" src="js/fff.js"></script>
+		<script src="js/mui.poppicker.js"></script>
+		<script src="js/mui.picker.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			var listArr;
+			var isConnectting = false; //wifi工具状态，是否连接
+			itemValue = '1';
+			sessionStorage.setItem('itemText', 'HST-AT');
+			(function($, doc) {
+				$.init();
+				$.ready(function() {
+
+					listArr = new Array();
+
+					//波特率
+					var ratePicker = new $.PopPicker();
+					ratePicker.setData([{
+						value: '1',
+						text: '9600'
+					}, {
+						value: '2',
+						text: '115200'
+					}]);
+					var showRatePickerButton = doc.getElementById('showRatePicker');
+
+					showRatePickerButton.addEventListener('tap', function(event) {
+						ratePicker.show(function(items) {
+							showRatePickerButton.innerHTML = "波特率：" + items[0]['text'];
+							itemValue = items[0]['value'];
+
+							if(itemValue == '1') {
+								sendOrderOfBaudrate(9600);
+							} else {
+								sendOrderOfBaudrate(115200);
+							}
+						});
+					}, false);
+
+					//型号
+					var userPicker = new $.PopPicker();
+					userPicker.setData([{
+						value: '1',
+						text: 'HST-AT'
+					}, {
+						value: '2',
+						text: 'VGC-8专业版'
+					}, {
+						value: '3',
+						text: 'HST-M/A'
+					}]);
+					var showUserPickerButton = doc.getElementById('showUserPicker');
+					showUserPickerButton.addEventListener('tap', function(event) {
+						userPicker.show(function(items) {
+							showUserPickerButton.innerHTML = items[0]['text'] + '<div class="versionChooseP"></div>';
+							itemValue = items[0]['value'];
+							sessionStorage.setItem('itemText', items[0]['text'])
+
+							var list1 = jQuery('#list1');
+							var list2 = jQuery('#list2');
+							var list3 = jQuery('#list3');
+
+							if(itemValue == '3') {
+								showRatePickerButton.style.display = 'block';
+
+								list1.animate({
+									opacity: '0'
+								});
+								list2.animate({
+									opacity: '0'
+								});
+								list3.animate({
+									top: '100px',
+									opacity: '1'
+								}, 'slow');
+								android.sendData2();
+							} else {
+								showRatePickerButton.style.display = 'none';
+
+								list3.animate({
+									opacity: '0'
+								});
+								list2.animate({
+									opacity: '0'
+								});
+								list1.animate({
+									top: '100px',
+									opacity: '1'
+								}, 'slow');
+							}
+							//返回 false 可以阻止选择框的关闭
+							//return false;
+						});
+					}, false);
+
+					//          三模式点击
+					var setting = doc.getElementById('setting');
+					setting.addEventListener('tap', function(event) {
+						location.href = 'setting.html';
+					}, false);
+
+					var findOut = doc.getElementById('findOut');
+					findOut.addEventListener('tap', function(event) {
+
+						mui.toast('查询中', {
+							duration: 'long',
+							type: 'div'
+						})
+						sendM_1();
+					}, false);
+
+					var debugBtn = doc.getElementById('debug');
+					debugBtn.addEventListener('tap', function(event) {
+						location.href = 'debug.html';
+					}, false);
+
+					var orgHeight = jQuery('#list2').offset().top;
+					jQuery('#list2').css({
+						top: orgHeight
+					});
+
+					jQuery('#gaoji').click(function() {
+						var list1 = jQuery('#list1');
+						var list2 = jQuery('#list2');
+						var list3 = jQuery('#list3');
+
+						list1.animate({
+							opacity: '0'
+						});
+						list3.animate({
+							opacity: '0'
+						});
+						list2.animate({
+							top: '100px',
+							opacity: '1'
+						}, 'slow');
+
+					})
+					jQuery('#shouqi').click(function() {
+						var list1 = jQuery('#list1');
+						var list2 = jQuery('#list2');
+						var list3 = jQuery('#list3');
+
+						list2.animate({
+							top: orgHeight,
+							opacity: '0'
+						}, 'slow');
+						list1.animate({
+							opacity: '1'
+						});
+					})
+
+					if(sessionStorage.length) {
+						jQuery('#connect').text(sessionStorage.getItem('ca_connect'))
+						jQuery('#U').text(sessionStorage.getItem('ca_U'))
+						jQuery('#V').text(sessionStorage.getItem('ca_V'))
+						jQuery('#T').text(sessionStorage.getItem('ca_T'))
+						jQuery('#I').text(sessionStorage.getItem('ca_I'))
+						jQuery('#E').text(sessionStorage.getItem('ca_E'))
+						jQuery('#LC').text(sessionStorage.getItem('ca_LC'))
+						jQuery('#M_7').text(sessionStorage.getItem('ca_M_7'))
+						jQuery('#M_6').text(sessionStorage.getItem('ca_M_6'))
+						jQuery('#M_2').text(sessionStorage.getItem('ca_M_2'))
+						jQuery('#M_1').text(sessionStorage.getItem('ca_M_1'))
+						jQuery('#W').text(sessionStorage.getItem('ca_W'))
+						jQuery('#7').text(sessionStorage.getItem('ca_7'))
+						jQuery('#R').text(sessionStorage.getItem('ca_R'))
+						jQuery('#D').text(sessionStorage.getItem('ca_D'))
+						jQuery('#N').text(sessionStorage.getItem('ca_N'))
+						jQuery('#B').text(sessionStorage.getItem('ca_B'))
+						jQuery('#A').text(sessionStorage.getItem('ca_A'))
+						jQuery('#i').text(sessionStorage.getItem('ca_i'))
+						jQuery('#e').text(sessionStorage.getItem('ca_e'))
+						jQuery('#s').text(sessionStorage.getItem('ca_s'))
+						jQuery('#S').text(sessionStorage.getItem('ca_S'))
+					}
+
+				});
+			})(mui, document);
+		</script>
+	</body>
+
+</html>
